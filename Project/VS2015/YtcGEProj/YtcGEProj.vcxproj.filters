@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestString.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestVector.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="UnitTests">
+      <UniqueIdentifier>{9a5554f7-db5f-44a6-ac06-7200e4373034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{8ba15e8f-a13b-4657-81d0-2f243442d3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{81bac830-9246-4b1b-aeec-5c9c1dadef92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Log">
+      <UniqueIdentifier>{3667f0ad-b687-4c5d-84ae-ae5556122a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Math">
+      <UniqueIdentifier>{d34d7e0f-7190-4166-ba78-96745f42de2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Platform">
+      <UniqueIdentifier>{98b694db-ec59-4e80-93a1-e66143345c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\StringUtils">
+      <UniqueIdentifier>{39de9f6a-24f2-4e7f-b196-070c5f9de3ee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\UnitTests\TestString.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestVector.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMath.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\StringUtils\Stringfication.hpp">
+      <Filter>Source\Core\StringUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp">
+      <Filter>Source\Core\StringUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
