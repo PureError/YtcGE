@@ -1,5 +1,5 @@
 #include "TestString.hpp"
-
+#include <Core/Log/YtcLog.hpp>
 #include <cassert>
 using namespace std;
 using namespace YtcGE;
@@ -36,5 +36,6 @@ static void TestTrim()
 
 void DoTestString()
 {
+    TEMP_LOG("Start string test:");
     TestTrim();
 }

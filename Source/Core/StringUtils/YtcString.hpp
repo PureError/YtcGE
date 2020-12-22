@@ -3,11 +3,11 @@
 #define YTC_STRING_HPP
 
 
-#include "../Platform/YtcOS.hpp"
+#include "Core/Fundation.hpp"
 
 #include <string>
 #include <sstream>
-#include <algorithm>
+
 #ifdef YTC_OS_WINDOWS
 #if defined(_UNICODE) || defined(UNICODE)
 #define YTC_UNICODE
@@ -22,7 +22,7 @@ namespace YtcGE
     using StringBase = std::basic_string<C, T, A>;
 
     template<typename C, typename T, typename A>
-    class String_T : public ::std::basic_string<C, T, A>
+    class String_T final : public ::std::basic_string<C, T, A>
     {
     public:
         using Base = StringBase<C, T, A>;
@@ -83,7 +83,7 @@ namespace YtcGE
             return rfind(str) == (length() - traits_type::length(str));
         }
 
-        bool EndWith(const Base& str) const
+        bool EndWith(const Base& str) const noexcept
         {
             return EndWith(str.c_str());
         }
@@ -166,7 +166,6 @@ namespace YtcGE
         return std::to_string(val);
 #endif
     }
-
 
 }
 #endif

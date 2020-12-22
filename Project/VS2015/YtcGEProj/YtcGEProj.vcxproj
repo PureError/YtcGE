@@ -20,17 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestString.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestVector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcMath.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMatrix.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
     <ClInclude Include="..\..\..\Source\Core\StringUtils\Stringfication.hpp" />
     <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestMatrix.hpp" />
     <ClInclude Include="..\..\..\UnitTests\TestString.hpp" />
     <ClInclude Include="..\..\..\UnitTests\TestVector.hpp" />
   </ItemGroup>

@@ -8,12 +8,12 @@
 namespace YtcGE
 {
     template<typename T, int N>
-    class Vector
+    class Vector final
     {
         static_assert(std::is_arithmetic<T>::value, "can not use non-numeric type");
         using InternalStruct = std::array<T, N>;
     public:
-        using Vector_t = Vector<T, N>;
+        using Vector_T = Vector<T, N>;
         using value_type = typename InternalStruct::value_type;
         using difference_type = typename InternalStruct::difference_type;
         using pointer = typename InternalStruct::pointer;
@@ -28,7 +28,7 @@ namespace YtcGE
 
         constexpr Vector(value_type val) noexcept
         {
-            data_.fill(val);
+            Fill(val);
         }
 
         constexpr Vector(std::initializer_list<T> initializer) noexcept
@@ -42,21 +42,21 @@ namespace YtcGE
             std::copy(other.begin(), other.begin() + std::min(Size(), other.Size()), begin());
         }
 
-        constexpr Vector(const Vector_t& other) noexcept : data_(other.data_)
+        constexpr Vector(const Vector_T& other) noexcept : data_(other.data_)
         {
         }
 
-        constexpr Vector(Vector_t&& other)  noexcept : data_(std::move(other.data_))
+        constexpr Vector(Vector_T&& other)  noexcept : data_(std::move(other.data_))
         {
         }
 
-        Vector_t& operator=(std::initializer_list<T> initializer) 
+        Vector_T& operator=(std::initializer_list<T> initializer) 
         {
             std::copy(initializer.begin(), initializer.end(), begin());
             return *this;
         }
 
-        Vector_t& operator=(const Vector_t&& other) noexcept
+        Vector_T& operator=(const Vector_T&& other) noexcept
         {
             if (this != &other)
             {
@@ -72,7 +72,7 @@ namespace YtcGE
             return *this;
         }
 
-        Vector_t& operator=(const Vector_t& other) noexcept
+        Vector_T& operator=(const Vector_T& other) noexcept
         {
             if (this != &other)
             {
@@ -81,9 +81,9 @@ namespace YtcGE
             return *this;
         }
 
-        static const Vector_t& Zero() noexcept
+        static const Vector_T& Zero() noexcept
         {
-            static Vector_t zero(T(0));
+            static Vector_T zero(T(0));
             return zero;
         }
 
@@ -162,9 +162,14 @@ namespace YtcGE
             return data_[i];
         }
 
-        void Swap(Vector_t& other)
+        void Swap(Vector_T& other)
         {
             data_.swap(other.data_);
+        }
+
+        void Fill(T val) noexcept
+        {
+            data_.fill(val);
         }
 
         template<typename U>
@@ -190,10 +195,10 @@ namespace YtcGE
             using Type = Vector<U, N>;
         };
 
-        template<typename U> Vector_t& operator+=(const Vector<U, N>& other) noexcept;
-        template<typename U> Vector_t& operator-=(const Vector<U, N>& other) noexcept;
-        template<typename U> Vector_t& operator*=(U scale) noexcept;
-        template<typename U> Vector_t& operator/=(U divisor) noexcept;
+        template<typename U> Vector_T& operator+=(const Vector<U, N>& other) noexcept;
+        template<typename U> Vector_T& operator-=(const Vector<U, N>& other) noexcept;
+        template<typename U> Vector_T& operator*=(U scale) noexcept;
+        template<typename U> Vector_T& operator/=(U divisor) noexcept;
     private:
         InternalStruct data_;
     };
@@ -347,12 +352,33 @@ namespace YtcGE
         return std::sqrt(LengthSquared(vec));
     }
 
+    template<typename T, typename U, int N>
+    inline bool Perpendicular(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    {
+        using ResultType = decltype(Dot(lhs, rhs));
+        return NearlyEqual(Dot(lhs, rhs), ResultType(0));
+    }
+
+    template<typename T, typename U, int N>
+    inline std::common_type_t<float, T, U> CosineValueOfAngleBetween(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    {
+        using ResultType = std::common_type_t<float, T, U>;
+        return Dot(lhs, rhs) / ResultType(Length(lhs) * Length(rhs));
+    }
+
+    template<typename T, typename U, int N>
+    inline std::common_type_t<float, T, U> AngleBetween(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    {
+        return std::acos(CosineValueOfAngleBetween(lhs, rhs));
+    }
+
     using Vec2i = Vector<int, 2>;
     using Vec3i = Vector<int, 3>;
     using Vec4i = Vector<int, 4>;
     using Vec2f = Vector<float, 2>;
     using Vec3f = Vector<float, 3>;
     using Vec4f = Vector<float, 4>;
+
 
 }
 

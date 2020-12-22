@@ -2,6 +2,8 @@
 #ifndef MATH_UTIL_HPP
 #define MATH_UTIL_HPP
 
+
+#include <cmath>
 #include <numeric>
 #include <limits>
 #include <functional>
@@ -19,6 +21,20 @@ namespace YtcGE
     constexpr inline bool NearlyEqual(T lhs, T rhs) noexcept
     {
         return Abs(lhs - rhs) <= std::numeric_limits<typename std::enable_if_t<std::is_floating_point<T>::value, T>>::epsilon();
+    }
+
+    constexpr float Pi = 3.14159265358f;
+
+    template<typename T>
+    constexpr inline std::common_type_t<float, T> AngleToRadians(T angle) noexcept
+    {
+        return angle * Pi / 180.0f;
+    }
+
+    template<typename T>
+    constexpr inline std::common_type_t<float, T> RadiansToAngle(T radians) noexcept
+    {
+        return radians * 180.0f / Pi;
     }
 }
 

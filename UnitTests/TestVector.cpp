@@ -32,6 +32,7 @@ static void TestCtor()
 
 static void TestOperations()
 {
+    Vec4f v{};
     Vec4f lhs(1.0f);
     Vec4f rhs(2.0f);
     auto sum = lhs + rhs;
