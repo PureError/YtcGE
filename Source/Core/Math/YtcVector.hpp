@@ -11,6 +11,10 @@ namespace YtcGE
     class Vector final
     {
         static_assert(std::is_arithmetic<T>::value, "can not use non-numeric type");
+        
+        template<typename U, int M>
+        friend class Vector;
+
         using InternalStruct = std::array<T, N>;
     public:
         using Vector_T = Vector<T, N>;
@@ -36,10 +40,10 @@ namespace YtcGE
             *this = std::move(initializer);
         }
 
-        template<typename U, int S>
-        constexpr Vector(const Vector<U, S>& other) noexcept
+        template<typename U, int M>
+        constexpr Vector(const Vector<U, M>& other) noexcept
         {
-            std::copy(other.begin(), other.begin() + std::min(Size(), other.Size()), begin());
+            *this = other;
         }
 
         constexpr Vector(const Vector_T& other) noexcept : data_(other.data_)
@@ -65,12 +69,17 @@ namespace YtcGE
             return *this;
         }
 
-        template<typename U, int S>
-        Vector& operator=(const Vector<U, S>& other) noexcept
+        template<typename U, int M>
+        Vector_T& operator=(const Vector<U, M>& other) noexcept
         {
-            std::copy(other.begin(), other.begin() + std::min(Size(), other.Size()), begin());
+            constexpr int size = std::min(M, N);
+            for (int i = 0; i < size; ++i)
+            {
+                data_[i] = static_cast<T>(other.data_[i]);
+            }
             return *this;
         }
+
 
         Vector_T& operator=(const Vector_T& other) noexcept
         {

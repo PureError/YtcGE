@@ -167,5 +167,20 @@ namespace YtcGE
 #endif
     }
 
+
+}
+
+namespace std
+{
+    template<>
+    struct hash<::YtcGE::AString> : hash<string>
+    {
+    };
+
+    template<>
+    struct hash<::YtcGE::WString> : hash<wstring>
+    {
+    };
+
 }
 #endif

@@ -65,5 +65,7 @@ void DoTestMatrix()
 
     Vec4f v(1.0f);
     assert(v.NearlyEqualTo(v * SquareMatrixHelper44f::Identity()));
-    cout << m1 << m2;
+
+    Mat44i mi(m1);
+    cout << m1 << m2 << mi;
 }

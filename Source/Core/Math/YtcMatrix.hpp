@@ -10,6 +10,8 @@ namespace YtcGE
     template<typename T, int Row, int Col>
     class Matrix final
     {
+        template<typename U, int Row, int Col>
+        friend class Matrix;
     public:
         using RowVector_T = Vector<T, Col>;
         using ColVector_T = Vector<T, Row>;
@@ -47,6 +49,12 @@ namespace YtcGE
 
         constexpr Matrix(const Matrix_T& other) noexcept : data_(other.data_)
         {
+        }
+
+        template<typename U>
+        constexpr Matrix(const Matrix<U, Row, Col>& other) noexcept
+        {
+            *this = other;
         }
 
         constexpr Matrix(Matrix_T&& other) noexcept : data_(std::move(other.data_))
@@ -91,6 +99,16 @@ namespace YtcGE
             if (this != &other)
             {
                 std::copy(other.begin(), other.end(), begin());
+            }
+            return *this;
+        }
+
+        template<typename U>
+        Matrix_T& operator=(const Matrix<U, Row, Col>& other) noexcept
+        {
+            for (int i = 0; i < Row; ++i)
+            {
+                data_[i] = other.data_[i];
             }
             return *this;
         }

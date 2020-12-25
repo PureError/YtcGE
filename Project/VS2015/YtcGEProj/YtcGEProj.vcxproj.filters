@@ -11,6 +11,15 @@
     <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp">
       <Filter>UnitTests</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp">
+      <Filter>Source\Core\App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Window\YtcWindowsWindow.cpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -33,6 +42,15 @@
     </Filter>
     <Filter Include="Source\Core\StringUtils">
       <UniqueIdentifier>{39de9f6a-24f2-4e7f-b196-070c5f9de3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\App">
+      <UniqueIdentifier>{d5c535b3-3a6e-45c5-be3f-b4c6e4bf1c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Window">
+      <UniqueIdentifier>{0f44bf3d-93d8-4330-8396-8d32766f61b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Utility">
+      <UniqueIdentifier>{f422a434-4a11-4888-9be4-9ca1ba10355a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +92,27 @@
     </ClInclude>
     <ClInclude Include="..\..\..\UnitTests\TestMatrix.hpp">
       <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp">
+      <Filter>Source\Core\App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Window\YtcWindow.hpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Window\YtcWindowsWindow.hpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\Localization.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp">
+      <Filter>Source\Core\Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
