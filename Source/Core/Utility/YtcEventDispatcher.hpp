@@ -90,10 +90,16 @@ namespace YtcGE
     {
     public:
         using TagType = T;
-        using HandlerList = std::unordered_map<String, SharedPtr<ICallable>>;
+        using HandlerName = String;
+        using HandlerList = std::unordered_map<HandlerName, SharedPtr<ICallable>>;
         EventDispatcher() noexcept
         {
         }
+
+        ~EventDispatcher() noexcept
+        {
+        }
+
         template<typename...Args>
         void Dispatch(const T& tag,  Args&&...args) 
         {
@@ -109,10 +115,11 @@ namespace YtcGE
         }
 
         template<typename...Args>
-        void Register(std::function<void(Args...)> f, const T& tag, const String& name = _T("unnamed"))
+        void Register(std::function<void(Args...)> f, const T& tag, const HandlerName& name)
         {
             eventMap_[tag][name] = std::static_pointer_cast<ICallable>(MakeShared<EventHandler<Args...>>(std::move(f)));
         }
+
     private:
         std::unordered_map<T, HandlerList> eventMap_;
     };

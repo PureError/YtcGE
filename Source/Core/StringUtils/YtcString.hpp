@@ -68,7 +68,7 @@ namespace YtcGE
         {
         }
 
-        template<class Iter, class = typename enable_if<std::_Is_iterator<Iter>::value, void>::type>
+        template<class Iter, class = typename std::enable_if_t<typename std::_Is_iterator<Iter>::value, Iter>>
         String_T(Iter begin, Iter end) : Base(begin, end)
         {
         }

@@ -16,10 +16,6 @@ namespace YtcGE
         {
         }
 
-        Exception(Exception&& other) noexcept : message_(std::move(other.message_))
-        {
-        }
-        
         Exception(const String& msg) noexcept : message_(msg)
         {
         }

@@ -3,9 +3,9 @@
 #include "TestString.hpp"
 #include "TestMatrix.hpp"
 #include <core/Utility/YtcEventDispatcher.hpp>
-#ifdef YTC_OS_WINDOWS
-#include <Core/Window/YtcWindowsWindow.hpp>
-#endif
+
+
+#include <Core/App/YtcApplication.hpp>
 
 #include <sstream>
 #include <iostream>
@@ -14,11 +14,11 @@ using namespace YtcGE;
 using namespace std;
 
 
-int main()
+int main(int argc, const Char* argv[])
 {
-    CommonWindowAttributes attr{};
-    WindowPtr win = MakeShared<WindowsWindow>(attr);
-    win->Run();
-
+    std::vector<String> cmdArgs(argc);
+    std::copy(argv, argv + argc, cmdArgs.begin());
+    Application app(cmdArgs);
+    app.Run();
     return 0;
 }

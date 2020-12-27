@@ -18,7 +18,6 @@ namespace YtcGE
     class BaseWindow
     {
     public:
-        using EventHanlder = std::function<void(BaseWindow&)>;
         BaseWindow(const CommonWindowAttributes& attr);
         virtual ~BaseWindow();
         virtual void Update() = 0;
@@ -44,25 +43,6 @@ namespace YtcGE
             return attr_.active;
         }
 
-        EventHanlder& OnPaint() noexcept
-        {
-            return onPaint_;
-        }
-
-        EventHanlder& OnResize() noexcept
-        {
-            return onResize_;
-        }
-
-        EventHanlder& OnClosed() noexcept
-        {
-            return onClosed_;
-        }
-
-        EventHanlder& OnActive() noexcept
-        {
-            return onActive_;
-        }
 
         void SetVisible(bool visible)
         {
@@ -99,10 +79,6 @@ namespace YtcGE
         virtual void SetVisiblityImpl(bool visible) = 0;
     private:
         CommonWindowAttributes attr_;
-        EventHanlder onPaint_;
-        EventHanlder onResize_;
-        EventHanlder onClosed_;
-        EventHanlder onActive_;
     };
 
     using WindowPtr = SharedPtr<BaseWindow>;

@@ -3,7 +3,9 @@
 
 
 #include "YtcWindow.hpp"
+#include "Core/Utility/YtcEventDispatcher.hpp"
 #include <windows.h>
+#include <thread>
 namespace YtcGE
 {
     class WindowsWindow : public BaseWindow
@@ -32,6 +34,7 @@ namespace YtcGE
         static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
         LRESULT OnWinMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
         HWND wnd_;
+		UniquePtr<EventDispatcher<UINT>> eventDispatcher_;
     };
 }
 #endif

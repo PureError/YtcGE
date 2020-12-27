@@ -33,6 +33,7 @@ YtcGE::WindowsWindow::WindowsWindow(const CommonWindowAttributes& cwa, const Nat
     ::SetWindowLongPtr(hwnd, GWLP_USERDATA, LONG_PTR(this));
     wnd_ = hwnd;
     SetVisiblityImpl(cwa.visible);
+    eventDispatcher_ = MakeUnique<EventDispatcher<UINT>>();
 }
 
 
@@ -53,31 +54,32 @@ void YtcGE::WindowsWindow::FullScreen()
 
 void YtcGE::WindowsWindow::Run()
 {
-    UniquePtr<MSG> msg = MakeUnique<MSG>();
-    auto msgPtr = msg.get();
-    auto hwnd = wnd_;
-    BOOL hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_NOREMOVE);
-    while (msgPtr->message != WM_QUIT)
-    {
-        if (Active())
-        {
-            hasMsg =::PeekMessage(msgPtr, hwnd, 0, 0, PM_REMOVE);
-        }
-        else
-        {
-            hasMsg = ::GetMessage(msgPtr, hwnd, 0, 0);
-        }
+	UniquePtr<MSG> msg = MakeUnique<MSG>();
+	auto msgPtr = msg.get();
+	auto hwnd = wnd_;
+	BOOL hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_NOREMOVE);
+	while (msgPtr->message != WM_QUIT)
+	{
+		if (Active())
+		{
+			hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_REMOVE);
+		}
+		else
+		{
+			hasMsg = ::GetMessage(msgPtr, hwnd, 0, 0);
+		}
 
-        if (hasMsg)
-        {
-            ::TranslateMessage(msgPtr);
-            ::DispatchMessage(msgPtr);
-        }
-        else
-        {
-            //‰÷»æ
-        }
-    }
+		if (hasMsg)
+		{
+			::TranslateMessage(msgPtr);
+			::DispatchMessage(msgPtr);
+		}
+		else
+		{
+			//‰÷»æ
+		}
+	}
+
 }
 
 void YtcGE::WindowsWindow::DoResize(int w, int h)
@@ -110,7 +112,18 @@ LRESULT YtcGE::WindowsWindow::OnWinMessage(UINT uMsg, WPARAM wParam, LPARAM lPar
 {
     switch (uMsg)
     {
+        case WM_PAINT:
+            break;
+        case WM_SIZE:
+            break;
+        case WM_CLOSE:
+            ::PostMessage(wnd_, WM_QUIT, 0, 0);
+            break;
+        case WM_DESTROY:
+            break;
+        default:
+            break;
     }
-    return ::DefWindowProc(wnd_, uMsg, wParam, lParam);
+	return ::DefWindowProc(wnd_, uMsg, wParam, lParam);
 }
 

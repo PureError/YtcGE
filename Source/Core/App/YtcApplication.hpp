@@ -2,6 +2,9 @@
 #define YTC_APPLICATION_HPP
 
 #include "../StringUtils/YtcString.hpp"
+#include "../Window/YtcWindow.hpp"
+
+#include <vector>
 
 namespace YtcGE
 {
@@ -9,12 +12,16 @@ namespace YtcGE
     class Application
     {
     public:
-        Application(const String& name);
-        virtual void Run() {}
-        virtual ~Application() {}
+        Application();
+        Application(const std::vector<String>& cmdArgs);
+        void Run();
+        void Terminate();
+        ~Application();
     protected:
-        String name_;
-        float fps_;
+        WindowPtr MakeWindow() const;
+        struct Impl;
+        UniquePtr<Impl> impl_;
+        std::vector<String> cmds_;
     };
 }
 
