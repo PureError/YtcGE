@@ -11,7 +11,6 @@
 #include <tuple>
 namespace YtcGE
 {
-
     class ICallable
     {
     public:
@@ -19,36 +18,35 @@ namespace YtcGE
         virtual ~ICallable() {}
     };
 
-
     template<typename F, typename...Args, size_t...I>
-    inline auto InvokeImpl(F&& f, std::tuple<Args...>&& argsTuple, std::index_sequence<I...>)
-        -> decltype (std::invoke(std::forward<F>(f), std::get<I>(std::forward<std::tuple<Args...>>(argsTuple))...))
+    inline auto UnpackInvokeImpl(F&& f, std::tuple<Args...>& argsTuple, std::index_sequence<I...>)
+        -> decltype (std::invoke(std::forward<F>(f), std::get<I>(argsTuple)...))
     {
-        return std::invoke(std::forward<F>(f), std::get<I>(std::forward<std::tuple<Args...>>(argsTuple))...);
+        return std::invoke(std::forward<F>(f), std::get<I>(argsTuple)...);
     }
 
+    template<typename F, typename...Args, size_t...I>
+    inline auto UnpackInvokeImpl(F&& f, std::tuple<Args...>&& argsTuple, std::index_sequence<I...>)
+        -> decltype (std::invoke(std::forward<F>(f), std::get<I>(std::move(argsTuple))...))
+    {
+        return std::invoke(std::forward<F>(f), std::get<I>(std::move(argsTuple))...);
+    }
 
-    template<typename F, typename...Args>
     struct InvokeHelper
     {
-        using ArgsTuple = std::tuple<Args...>;
-        static auto Invoke(F& f, ArgsTuple& tup)
-            ->decltype(InvokeImpl(std::forward<F>(f), std::forward<std::tuple<Args...>>(argsTuple), std::index_sequence_for<Args...>()))
-        {
-            return InvokeImpl(std::forward<F>(f), std::forward<std::tuple<Args...>>(argsTuple), std::index_sequence_for<Args...>());
-        }
-    };
-
-    template<typename F>
-    struct InvokeHelper<F>
-    {
-        using ArgsTuple = std::tuple<>;
-        static auto Invoke(F& f, ArgsTuple& tup)
-            ->decltype(std::invoke(std::forward<F>(f)))
+        template<typename F>
+        static auto UnpackInvoke(F&& f, std::tuple<>& emptyTup)->decltype(std::invoke(std::forward<F>(f)))
         {
             return std::invoke(std::forward<F>(f));
         }
+
+        template<typename F, typename...Args>
+        static auto UnpackInvoke(F&& f, std::tuple<Args...>& nonEmptyTup)->decltype(UnpackInvokeImpl(f, nonEmptyTup, std::index_sequence_for<Args...>()))
+        {
+            return UnpackInvokeImpl(std::forward<F>(f), nonEmptyTup, std::index_sequence_for<Args...>());
+        }
     };
+    
 
     template<typename...Args>
     class EventHandler : public ICallable
@@ -73,7 +71,7 @@ namespace YtcGE
 
         void Invoke() override
         {
-            InvokeHelper<Functor, Args...>::Invoke(func_, args_);
+            InvokeHelper::UnpackInvoke(func_, args_);
         }
 
         void operator()(Args&&...args)
@@ -91,7 +89,7 @@ namespace YtcGE
     public:
         using TagType = T;
         using HandlerName = String;
-        using HandlerList = std::unordered_map<HandlerName, SharedPtr<ICallable>>;
+        using HandlerList = std::vector<SharedPtr<ICallable>>;
         EventDispatcher() noexcept
         {
         }
@@ -109,15 +107,15 @@ namespace YtcGE
             {
                 for (auto& handler : iter->second)
                 {
-                    (*std::static_pointer_cast<HandlerType>(handler.second))(std::forward<Args>(args)...);
+                    (*std::static_pointer_cast<HandlerType>(handler))(std::forward<Args>(args)...);
                 }
             }
         }
 
         template<typename...Args>
-        void Register(std::function<void(Args...)> f, const T& tag, const HandlerName& name)
+        void Register(std::function<void(Args...)> f, const T& tag)
         {
-            eventMap_[tag][name] = std::static_pointer_cast<ICallable>(MakeShared<EventHandler<Args...>>(std::move(f)));
+            eventMap_[tag].push_back(std::static_pointer_cast<ICallable>(MakeShared<EventHandler<Args...>>(std::move(f))));
         }
 
     private:

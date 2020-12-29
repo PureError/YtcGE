@@ -1,16 +1,21 @@
 #include "YtcApplication.hpp"
-
-#ifdef YTC_OS_WINDOWS
-#include "../Window/YtcWindowsWindow.hpp"
-#endif
-
+#include "../Window/YtcWindow.hpp"
+#include "../Utility/Localization.hpp"
 #include <thread>
 
+
+using namespace YtcGE;
 struct YtcGE::Application::Impl
 {
-	std::thread winThread;
-	WindowPtr win;
+    WindowPtr window;
 };
+
+
+static inline YtcGE::WindowPtr MakeWindow() 
+{
+    return MakeShared<BasicWindow>(BasicWindow::Attributes());
+}
+
 
 YtcGE::Application::Application(const std::vector<String>& cmdArgs) : cmds_(cmdArgs), impl_(new Impl())
 {
@@ -24,28 +29,38 @@ YtcGE::Application::Application() : impl_(new Impl())
 
 void YtcGE::Application::Run()
 {
-	impl_->winThread = std::thread([this]()
-	{
-		impl_->win = MakeWindow();
-		impl_->win->Run();
-	});
+    impl_->window = MakeWindow();
+    UniquePtr<MSG> msg = MakeUnique<MSG>();
+    auto hwnd = impl_->window->Handle();
+    auto msgPtr = msg.get();
+    BOOL hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_NOREMOVE);
+    while (msgPtr->message != WM_QUIT)
+    {
+        if (impl_->window->Active())
+        {
+            hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_REMOVE);
+        }
+        else
+        {
+            hasMsg = ::GetMessage(msgPtr, hwnd, 0, 0);
+        }
+
+        if (hasMsg)
+        {
+            ::TranslateMessage(msgPtr);
+            ::DispatchMessage(msgPtr);
+        }
+        else
+        {
+            //äÖÈ¾
+        }
+    }
 
 }
 
-void YtcGE::Application::Terminate()
-{
-	if (impl_->winThread.joinable())
-	{
-		impl_->winThread.join();
-	}
-}
+
 
 YtcGE::Application::~Application()
 {
-	Terminate();
 }
 
-YtcGE::WindowPtr YtcGE::Application::MakeWindow() const
-{
-	return MakeShared<WindowsWindow>(CommonWindowAttributes());
-}

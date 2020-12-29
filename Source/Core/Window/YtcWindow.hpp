@@ -2,86 +2,107 @@
 #define YTC_WINDOW_HPP
 #include "../Fundation.hpp"
 #include "../StringUtils/YtcString.hpp"
+#include "../Utility/YtcEventDispatcher.hpp"
 #include <functional>
+#include <bitset>
+#ifdef YTC_OS_WINDOWS
+#include <Windows.h>
+#endif
+
+
 namespace YtcGE
 {
-    struct CommonWindowAttributes
-    {
-        String title{"YtcGE"};
-        int width{800};
-        int height{600};
-        bool vsync = false;
-        bool active = false;
-        bool visible = true;
-    };
-    
-    class BaseWindow
+    class BasicWindow 
     {
     public:
-        BaseWindow(const CommonWindowAttributes& attr);
-        virtual ~BaseWindow();
-        virtual void Update() = 0;
-        virtual void FullScreen() = 0;
-        virtual void Run() = 0;
-        int Width() const noexcept 
-        {
-            return attr_.width; 
-        }
 
-        int Height() const noexcept
+        enum Status
+        {
+            VISIBLE = 1,
+            ACTIVE = 1 << 1,
+            VSYNC = 1 << 2,
+        };
+        
+        struct Attributes
+        {
+            String title{ _T("YtcGE")};
+            int width { 800 };
+            int height { 600 };
+            uint32_t status { VISIBLE | ACTIVE };
+#ifdef YTC_OS_WINDOWS
+            UINT style{};
+            HINSTANCE hInstance{};
+            HICON hIcon{};
+            HCURSOR hCoursor{};
+            HBRUSH hbrBackground{};
+            HICON hIconSm{};
+#endif
+        };
+
+        BasicWindow(const Attributes& na = Attributes());
+        virtual ~BasicWindow();
+
+        int Height() const
         {
             return attr_.height;
         }
-        
-        const String& Title() const noexcept
+
+        int Width() const
+        {
+            return attr_.width;
+        }
+
+        const String & Title() const
         {
             return attr_.title;
         }
 
-        bool Active() const noexcept
+        bool Visible() const
         {
-            return attr_.active;
+            return (attr_.status & VISIBLE) == VISIBLE;
         }
 
-
-        void SetVisible(bool visible)
+        bool VSync() const
         {
-            SetVisiblityImpl(visible);
-            attr_.visible = visible;
+            return (attr_.status & VSYNC) == VSYNC ;
         }
 
-        bool Visible() const noexcept
+        bool Active() const
         {
-            return attr_.visible;
+            return (attr_.status & ACTIVE) == ACTIVE;
         }
 
-        void SetVSync(bool enabled) noexcept
+        template<typename F>
+        void AddEventListener(uint32_t e, F f)
         {
-            attr_.vsync = enabled;
-            SetVSyncImpl(enabled);
+            eventDispatcher_->Register(std::move(f), e);
         }
 
-        bool VSync() const noexcept
-        {
-            return attr_.vsync;
-        }
+        void SetVisiblity(bool visible);
+        void SetVSync(bool sync);
+        virtual void Update();
+        virtual void FullScreen();
+        virtual void Close();
 
-        void Resize(int w, int h)
+#ifdef YTC_OS_WINDOWS
+    public:
+        HWND Handle() const
         {
-            DoResize(w, h);
-            attr_.width = w;
-            attr_.height = h;
+            return wnd_;
         }
-
     private:
-        virtual void DoResize(int w, int h) = 0;
-        virtual void SetVSyncImpl(bool enabled) = 0;
-        virtual void SetVisiblityImpl(bool visible) = 0;
+        static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+        LRESULT OnWinMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
+        HWND wnd_;
+#endif
     private:
-        CommonWindowAttributes attr_;
+        virtual void DoResize(int w, int h);
+    private:
+        UniquePtr<EventDispatcher<UINT>> eventDispatcher_;
+        Attributes attr_;
     };
 
-    using WindowPtr = SharedPtr<BaseWindow>;
-}
+    using WindowPtr = SharedPtr<BasicWindow>;
 
+}
 #endif

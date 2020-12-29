@@ -17,9 +17,6 @@
     <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp">
       <Filter>Source\Core\Window</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Core\Window\YtcWindowsWindow.cpp">
-      <Filter>Source\Core\Window</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -97,9 +94,6 @@
       <Filter>Source\Core\App</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Window\YtcWindow.hpp">
-      <Filter>Source\Core\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Core\Window\YtcWindowsWindow.hpp">
       <Filter>Source\Core\Window</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp">
