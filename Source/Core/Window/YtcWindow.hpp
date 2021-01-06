@@ -90,6 +90,7 @@ namespace YtcGE
         {
             return wnd_;
         }
+
     private:
         static LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
         LRESULT OnWinMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);

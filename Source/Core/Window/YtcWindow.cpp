@@ -109,6 +109,7 @@ LRESULT YtcGE::BasicWindow::OnWinMessage(UINT uMsg, WPARAM wParam, LPARAM lParam
             break;
         case WM_CLOSE:
             Close();
+            return TRUE;
             break;
         case WM_DESTROY:
             break;

@@ -17,6 +17,9 @@
     <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp">
       <Filter>Source\Core\Window</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -48,6 +51,9 @@
     </Filter>
     <Filter Include="Source\Core\Utility">
       <UniqueIdentifier>{f422a434-4a11-4888-9be4-9ca1ba10355a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Render">
+      <UniqueIdentifier>{f30cd74d-e395-42d5-98e0-bc3ff07c45e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +113,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp">
       <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcPoint.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp">
+      <Filter>Source\Core\Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

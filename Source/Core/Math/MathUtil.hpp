@@ -36,6 +36,18 @@ namespace YtcGE
     {
         return radians * 180.0f / Pi;
     }
+
+    template<typename T>
+    constexpr inline T Clamp(const T& val, const T& lowerbound, const T& upperbound) noexcept
+    {
+        return (std::max)(lowerbound, (std::min)(val, upperbound));
+    }
+
+    template<typename T>
+    constexpr inline T Lerp(const T& lhs, const T& rhs, float s) noexcept
+    {
+        return lhs * (1.0f - s) + rhs * s;
+    }
 }
 
 #endif

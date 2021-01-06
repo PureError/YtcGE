@@ -302,24 +302,24 @@ namespace YtcGE
     }
 
     template<typename A, typename B, int R, int C>
-    inline Matrix<std::common_type_t<A, B>, R, C> operator*(const Matrix<A, R, C>& lhs, B scale) noexcept
+    inline Matrix<A, R, C> operator*(const Matrix<A, R, C>& lhs, B scale) noexcept
     {
-        using FinalType = Matrix<std::common_type_t<A, B>, R, C>;
+        using FinalType = Matrix<A, R, C>;
         FinalType result;
         Mult(lhs, scale, result);
         return result;
     }
 
     template<typename A, typename B, int R, int C>
-    inline Matrix<std::common_type_t<A, B>, R, C> operator*(B scale, const Matrix<A, R, C>& rhs) noexcept
+    inline Matrix<A, R, C> operator*(B scale, const Matrix<A, R, C>& rhs) noexcept
     {
         return rhs * scale;
     }
 
     template<typename A, typename B, int R, int C>
-    inline Matrix<typename std::common_type_t<float, A, B>, R, C> operator/(const Matrix<A, R, C>& lhs, B divisor) noexcept
+    inline Matrix<A, R, C> operator/(const Matrix<A, R, C>& lhs, B divisor) noexcept
     {
-        Matrix<typename std::common_type_t<float, A, B>, R, C> m;
+        Matrix<A, R, C> m;
         Div(lhs, divisor, m);
         return m;
     }

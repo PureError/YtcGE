@@ -166,7 +166,7 @@ namespace YtcGE
             return data_[i];
         }
 
-        const_reference operator[](int i) const
+        constexpr const_reference operator[](int i) const
         {
             return data_[i];
         }
@@ -181,6 +181,54 @@ namespace YtcGE
             data_.fill(val);
         }
 
+        T& X()
+        {
+            static_assert(N >= 1, "Must be 1D at least!");
+            return data_[0];
+        }
+
+        constexpr const T& X() const
+        {
+            static_assert(N >= 1, "Must be 1D at least!");
+            return data_[0];
+        }
+
+        T& Y()
+        {
+            static_assert(N >= 2, "Must be 2D at least!");
+            return data_[1];
+        }
+
+        constexpr const T& Y() const
+        {
+            static_assert(N >= 2, "Must be 2D at least!");
+            return data_[1];
+        }
+
+        T& Z()
+        {
+            static_assert(N >= 3, "Must be 3D at least!");
+            return data_[2];
+        }
+
+        constexpr const T& Z() const
+        {
+            static_assert(N >= 3, "Must be 3D at least!");
+            return data_[2];
+        }
+
+        T& W()
+        {
+            static_assert(N >= 4, "Must be 4D at least!");
+            return data_[3];
+        }
+
+        constexpr const T& W() const
+        {
+            static_assert(N >= 4, "Must be 4D at least!");
+            return data_[3];
+        }
+
         template<typename U>
         constexpr bool NearlyEqualTo(const Vector<U, N>& other) const noexcept
         {
@@ -193,7 +241,7 @@ namespace YtcGE
             return data_.data();
         }
 
-        operator const T*() const noexcept
+        constexpr operator const T*() const noexcept
         {
             return data_.data();
         }
@@ -208,9 +256,12 @@ namespace YtcGE
         template<typename U> Vector_T& operator-=(const Vector<U, N>& other) noexcept;
         template<typename U> Vector_T& operator*=(U scale) noexcept;
         template<typename U> Vector_T& operator/=(U divisor) noexcept;
+
+        void Normalize() noexcept;
     private:
         InternalStruct data_;
     };
+
 
     template<typename T, int N>
     constexpr inline bool operator==(const Vector<T, N>& lhs, const Vector<T, N>& rhs) noexcept
@@ -278,25 +329,23 @@ namespace YtcGE
     }
 
     template<typename T, typename U, int N>
-    inline Vector<std::common_type_t<T, U>, N> operator*(const Vector<T, N>& lhs, U scale) noexcept
+    inline Vector<T, N> operator*(const Vector<T, N>& lhs, U scale) noexcept
     {
-        using FinalType = std::common_type_t<T, U>;
-        Vector<FinalType, N> result;
+        Vector<T, N> result;
         Mult(lhs, scale, result);
         return result;
     }
 
     template<typename T, typename U, int N>
-    inline Vector<std::common_type_t<T, U>, N> operator*(U scale, const Vector<T, N>& rhs) noexcept
+    inline Vector<T, N> operator*(U scale, const Vector<T, N>& rhs) noexcept
     {
         return rhs * scale;
     }
 
     template<typename T, typename U, int N>
-    inline Vector<typename std::common_type_t<float, std::common_type_t<T, typename std::enable_if_t<std::is_arithmetic<U>::value, U>>>, N>
-                     operator/(const Vector<T, N>& lhs, U divisor) noexcept
+    inline Vector<T, N> operator/(const Vector<T, N>& lhs, U divisor) noexcept
     {
-        Vector<typename std::common_type_t<float, std::common_type_t<T, typename std::enable_if_t<std::is_arithmetic<U>>>>, N> result;
+        Vector<T, N> result;
         Div(lhs, divisor, result);
         return result;
     }
@@ -379,6 +428,24 @@ namespace YtcGE
     inline std::common_type_t<float, T, U> AngleBetween(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
     {
         return std::acos(CosineValueOfAngleBetween(lhs, rhs));
+    }
+
+    template<typename T, int N>
+    inline Vector<std::common_type_t<float, T>, N> Normalize(const Vector<T, N> & vec) noexcept
+    {
+        float len = (float)Length(vec);
+        return vec / len;
+    }
+
+
+    template<typename T, int N>
+    void YtcGE::Vector<T, N>::Normalize() noexcept
+    {
+        auto len = Length(*this);
+        if (len)
+        {
+            (*this) /= len;
+        }
     }
 
     using Vec2i = Vector<int, 2>;
