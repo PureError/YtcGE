@@ -20,6 +20,15 @@
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp">
       <Filter>Source\Core\Render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -121,6 +130,18 @@
       <Filter>Source\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp">
       <Filter>Source\Core\Render</Filter>
     </ClInclude>
   </ItemGroup>

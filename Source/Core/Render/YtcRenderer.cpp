@@ -36,6 +36,62 @@ namespace YtcGE
 #endif
     }
 
+    void Renderer::DrawTriangle(const Triangle & t) noexcept
+    {
+        auto traps = SplitTriangle(t);
+
+        for (auto & trap : traps)
+        {
+            int h = static_cast<int>(trap.bottom - trap.top + 0.5f);
+            auto & left_v0 = *trap.edge_left[0];
+            auto & left_v1 = *trap.edge_left[1];
+            auto & right_v0 = *trap.edge_right[0];
+            auto & right_v1 = *trap.edge_right[1];
+
+            float h_left = left_v1.position.Y() - left_v0.position.Y();
+            float h_right = right_v1.position.Y() - right_v0.position.Y();
+
+            for (int y_steps = 0; y_steps <= h; ++y_steps)
+            {
+                auto vtx_left = Lerp(left_v0, left_v1, (float)y_steps / h_left);
+                auto vtx_right = Lerp(right_v0, right_v1, (float)y_steps / h_right);
+
+                auto w = vtx_right.position.X() - vtx_left.position.X();
+                
+            }
+        }
+    }
+
+
+    std::array<YtcGE::Trapzoid, 2> Renderer::SplitTriangle(const Triangle & t) noexcept
+    {
+        std::sort(t.vertices.begin(), t.vertices.end(), [](const Vertex & lhs, const Vertex & rhs)
+        {
+            return lhs.position.Y() < rhs.position.Y();
+        });
+        const auto & v0 = t.vertices[0];
+        const auto & v1 = t.vertices[1];
+        const auto & v2 = t.vertices[2];
+        std::array<YtcGE::Trapzoid, 2> trapzoids;
+        auto & t1 = trapzoids[0];
+        auto & t2 = trapzoids[1];
+        t1.top = v0->position.Y();
+        t1.bottom = v1->position.Y();
+        t1.edge_left[0] = v0;
+        t1.edge_left[1] = v1;
+        t2.edge_right[0] = v0;
+        t2.edge_right[1] = v2;
+
+        t2.top = v1->position.Y();
+        t2.bottom = v2->position.Y();
+        t2.edge_left[0] = v1;
+        t2.edge_left[1] = v2;
+        t2.edge_right[0] = v0;
+        t2.edge_right[1] = v2;
+
+        return trapzoids;
+    }
+
     void Renderer::DrawTriangle2D(std::array<Point2i, 3> points, const ColorF& color, bool filling) noexcept
     {
         std::sort(points.begin(), points.end(), [](const Point2i & lhs, const Point2i & rhs)
@@ -106,7 +162,7 @@ namespace YtcGE
                 for (int y = from.Y(), x = from.X(), step_count = 0; y != to.Y(); ++step_count)
                 {
                     y += step_y;
-                    x = from.X() + step_count * step_x;
+                    x = from.X() + step_count * step_x + 0.5f;
                     ::SetPixel(hdc, x, y, rgb);
                 }
             }
@@ -128,7 +184,7 @@ namespace YtcGE
                 for (int x = from.X(), y = from.Y(), step_count = 0; x != to.X(); ++step_count)
                 {
                     x += step_x;
-                    y = from.Y() + step_count * step_y;
+                    y = from.Y() + step_count * step_y + 0.5f;
                     ::SetPixel(hdc, x, y, rgb);
                 }
             }

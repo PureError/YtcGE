@@ -20,7 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp" />
     <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp" />
@@ -39,8 +42,12 @@
     <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp" />
     <ClInclude Include="..\..\..\Source\Core\StringUtils\Stringfication.hpp" />
     <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp" />

@@ -17,6 +17,18 @@ namespace YtcGE
         return std::abs(val);
     }
 
+    template<typename A, typename B>
+    constexpr inline std::common_type_t<A, B> Min(const A & a, const B & b) noexcept
+    {
+        return a < b ? a : b;
+    }
+
+    template<typename A, typename B>
+    constexpr inline std::common_type_t<A, B> Max(const A & a, const B & b) noexcept
+    {
+        return a > b ? a : b;
+    }
+
     template<typename T>
     constexpr inline bool NearlyEqual(T lhs, T rhs) noexcept
     {
@@ -46,7 +58,7 @@ namespace YtcGE
     template<typename T>
     constexpr inline T Lerp(const T& lhs, const T& rhs, float s) noexcept
     {
-        return lhs * (1.0f - s) + rhs * s;
+        return lhs + (rhs - lhs) * s;
     }
 }
 

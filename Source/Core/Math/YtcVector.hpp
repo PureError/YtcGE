@@ -12,7 +12,7 @@ namespace YtcGE
     {
         static_assert(std::is_arithmetic<T>::value, "can not use non-numeric type");
         
-        template<typename U, int M>
+        template<typename C, int M>
         friend class Vector;
 
         using InternalStruct = std::array<T, N>;
@@ -40,8 +40,8 @@ namespace YtcGE
             *this = std::move(initializer);
         }
 
-        template<typename U, int M>
-        constexpr Vector(const Vector<U, M>& other) noexcept
+        template<typename C, int M>
+        constexpr Vector(const Vector<C, M>& other) noexcept
         {
             *this = other;
         }
@@ -69,10 +69,10 @@ namespace YtcGE
             return *this;
         }
 
-        template<typename U, int M>
-        Vector_T& operator=(const Vector<U, M>& other) noexcept
+        template<typename C, int M>
+        Vector_T& operator=(const Vector<C, M>& other) noexcept
         {
-            constexpr int size = std::min(M, N);
+            constexpr int size = (std::min)(M, N);
             for (int i = 0; i < size; ++i)
             {
                 data_[i] = static_cast<T>(other.data_[i]);
@@ -181,58 +181,78 @@ namespace YtcGE
             data_.fill(val);
         }
 
-        T& X()
+        T& X() noexcept
         {
             static_assert(N >= 1, "Must be 1D at least!");
             return data_[0];
         }
 
-        constexpr const T& X() const
+        constexpr const T& X() const noexcept
         {
             static_assert(N >= 1, "Must be 1D at least!");
             return data_[0];
         }
 
-        T& Y()
+        T& Y() noexcept
         {
             static_assert(N >= 2, "Must be 2D at least!");
             return data_[1];
         }
 
-        constexpr const T& Y() const
+        constexpr const T& Y() const noexcept
         {
             static_assert(N >= 2, "Must be 2D at least!");
             return data_[1];
         }
 
-        T& Z()
+        T& Z() noexcept
         {
             static_assert(N >= 3, "Must be 3D at least!");
             return data_[2];
         }
 
-        constexpr const T& Z() const
+        constexpr const T& Z() const noexcept
         {
             static_assert(N >= 3, "Must be 3D at least!");
             return data_[2];
         }
 
-        T& W()
+        T& W() noexcept
         {
             static_assert(N >= 4, "Must be 4D at least!");
             return data_[3];
         }
 
-        constexpr const T& W() const
+        constexpr const T& W() const noexcept
         {
             static_assert(N >= 4, "Must be 4D at least!");
             return data_[3];
         }
 
-        template<typename U>
-        constexpr bool NearlyEqualTo(const Vector<U, N>& other) const noexcept
+        T & U() noexcept
         {
-            using ElemType = std::common_type_t<T, U>;
+            return X();
+        }
+
+        constexpr const T & U() const noexcept
+        {
+            return X();
+        }
+
+        T & V() noexcept
+        {
+            return Y();
+        }
+
+        constexpr const T & V() const noexcept
+        {
+            return Y();
+        }
+
+        template<typename C>
+        constexpr bool NearlyEqualTo(const Vector<C, N>& other) const noexcept
+        {
+            using ElemType = std::common_type_t<T, C>;
             return std::equal(cbegin(), cend(), other.cbegin(), other.cend(), NearlyEqual<ElemType>);
         }
 
@@ -246,16 +266,16 @@ namespace YtcGE
             return data_.data();
         }
 
-        template<typename U>
+        template<typename C>
         struct Rebind
         {
-            using Type = Vector<U, N>;
+            using Type = Vector<C, N>;
         };
 
-        template<typename U> Vector_T& operator+=(const Vector<U, N>& other) noexcept;
-        template<typename U> Vector_T& operator-=(const Vector<U, N>& other) noexcept;
-        template<typename U> Vector_T& operator*=(U scale) noexcept;
-        template<typename U> Vector_T& operator/=(U divisor) noexcept;
+        template<typename C> Vector_T& operator+=(const Vector<C, N>& other) noexcept;
+        template<typename C> Vector_T& operator-=(const Vector<C, N>& other) noexcept;
+        template<typename C> Vector_T& operator*=(C scale) noexcept;
+        template<typename C> Vector_T& operator/=(C divisor) noexcept;
 
         void Normalize() noexcept;
     private:
@@ -275,8 +295,8 @@ namespace YtcGE
         return !(lhs == rhs);
     }
 
-    template<typename T, typename U, typename C, int N>
-    inline void Add(const Vector<T, N>& lhs, const Vector<U, N>& rhs, Vector<C, N>& result) noexcept
+    template<typename T, typename C, typename O, int N>
+    inline void Add(const Vector<T, N>& lhs, const Vector<C, N>& rhs, Vector<O, N>& result) noexcept
     {
         for (int i = 0; i < N; ++i)
         {
@@ -284,66 +304,66 @@ namespace YtcGE
         }
     }
 
-    template<typename T, typename U, typename C, int N>
-    inline void Sub(const Vector<T, N>& lhs, const Vector<U, N>& rhs, Vector<C, N>& result) noexcept
+    template<typename T, typename C, typename O, int N>
+    inline void Sub(const Vector<T, N>& lhs, const Vector<C, N>& rhs, Vector<O, N>& result) noexcept
     {
         for (int i = 0; i < N; ++i)
         {
-            result[i] = static_cast<std::common_type_t<T, U>>(lhs[i] - rhs[i]);
+            result[i] = static_cast<O>(lhs[i] - rhs[i]);
         }
     }
 
-    template<typename T, typename U, typename C, int N>
-    inline void Mult(const Vector<T, N>& lhs, U scale, Vector<C, N>& result) noexcept
+    template<typename T, typename C, typename O, int N>
+    inline void Mult(const Vector<T, N>& lhs, C scale, Vector<O, N>& result) noexcept
     {
-        static_assert(std::is_arithmetic<U>::value, "the type of <scale> should be numeric");
+        static_assert(std::is_arithmetic<C>::value, "the type of <scale> should be numeric");
         for (int i = 0; i < N; ++i)
         {
-            result[i] = static_cast<C>(lhs[i] * scale);
+            result[i] = static_cast<O>(lhs[i] * scale);
         }
     }
 
-    template<typename T, typename U, typename C, int N>
-    inline void Div(const Vector<T, N>& lhs, U divisor, Vector<C, N>& result) noexcept
+    template<typename T, typename C, typename O, int N>
+    inline void Div(const Vector<T, N>& lhs, C divisor, Vector<O, N>& result) noexcept
     {
         auto scale = 1.0f / divisor;
         Mult(lhs, scale, result);
     }
 
-    template<typename T, typename U, int N>
-    inline Vector<std::common_type_t<T, U>, N> operator+(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline Vector<std::common_type_t<T, C>, N> operator+(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
-        using FinalType = std::common_type_t<T, U>;
+        using FinalType = std::common_type_t<T, C>;
         Vector<FinalType, N> result;
         Add(lhs, rhs, result);
         return result;
     }
 
-    template<typename T, typename U, size_t N>
-    inline Vector<std::common_type_t<T, U>, N> operator-(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, size_t N>
+    inline Vector<std::common_type_t<T, C>, N> operator-(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
-        using FinalType = std::common_type_t<T, U>;
+        using FinalType = std::common_type_t<T, C>;
         Vector<FinalType, N> result;
         Sub(lhs, rhs, result);
         return result;
     }
 
-    template<typename T, typename U, int N>
-    inline Vector<T, N> operator*(const Vector<T, N>& lhs, U scale) noexcept
+    template<typename T, typename C, int N>
+    inline Vector<T, N> operator*(const Vector<T, N>& lhs, C scale) noexcept
     {
         Vector<T, N> result;
         Mult(lhs, scale, result);
         return result;
     }
 
-    template<typename T, typename U, int N>
-    inline Vector<T, N> operator*(U scale, const Vector<T, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline Vector<T, N> operator*(C scale, const Vector<T, N>& rhs) noexcept
     {
         return rhs * scale;
     }
 
-    template<typename T, typename U, int N>
-    inline Vector<T, N> operator/(const Vector<T, N>& lhs, U divisor) noexcept
+    template<typename T, typename C, int N>
+    inline Vector<T, N> operator/(const Vector<T, N>& lhs, C divisor) noexcept
     {
         Vector<T, N> result;
         Div(lhs, divisor, result);
@@ -351,41 +371,41 @@ namespace YtcGE
     }
 
     template<typename T, int N>
-    template<typename U>
-    inline Vector<T, N>& Vector<T, N>::operator+=(const Vector<U, N>& other) noexcept
+    template<typename C>
+    inline Vector<T, N>& Vector<T, N>::operator+=(const Vector<C, N>& other) noexcept
     {
         Add(*this, other, *this);
         return *this;
     }
 
     template<typename T, int N>
-    template<typename U>
-    inline Vector<T, N>& Vector<T, N>::operator-=(const Vector<U, N>& other) noexcept
+    template<typename C>
+    inline Vector<T, N>& Vector<T, N>::operator-=(const Vector<C, N>& other) noexcept
     {
         Sub(*this, other, *this);
         return *this;
     }
 
     template<typename T, int N>
-    template<typename U>
-    inline Vector<T, N>& Vector<T, N>::operator*=(U scale) noexcept
+    template<typename C>
+    inline Vector<T, N>& Vector<T, N>::operator*=(C scale) noexcept
     {
         Mult(*this, scale, *this);
         return *this;
     }
 
     template<typename T, int N>
-    template<typename U>
-    inline Vector<T, N>& Vector<T, N>::operator/=(U divisor) noexcept
+    template<typename C>
+    inline Vector<T, N>& Vector<T, N>::operator/=(C divisor) noexcept
     {
         Div(*this, divisor, *this);
         return *this;
     }
 
-    template<typename T, typename U, int N>
-    inline std::common_type_t<T, U> Dot(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline std::common_type_t<T, C> Dot(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
-        std::common_type_t<T, U> result{};
+        std::common_type_t<T, C> result{};
         for (int i = 0; i < N; ++i)
         {
             result += (lhs[i] * rhs[i]);
@@ -410,22 +430,22 @@ namespace YtcGE
         return std::sqrt(LengthSquared(vec));
     }
 
-    template<typename T, typename U, int N>
-    inline bool Perpendicular(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline bool Perpendicular(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
         using ResultType = decltype(Dot(lhs, rhs));
         return NearlyEqual(Dot(lhs, rhs), ResultType(0));
     }
 
-    template<typename T, typename U, int N>
-    inline std::common_type_t<float, T, U> CosineValueOfAngleBetween(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline std::common_type_t<float, T, C> CosineValueOfAngleBetween(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
-        using ResultType = std::common_type_t<float, T, U>;
+        using ResultType = std::common_type_t<float, T, C>;
         return Dot(lhs, rhs) / ResultType(Length(lhs) * Length(rhs));
     }
 
-    template<typename T, typename U, int N>
-    inline std::common_type_t<float, T, U> AngleBetween(const Vector<T, N>& lhs, const Vector<U, N>& rhs) noexcept
+    template<typename T, typename C, int N>
+    inline std::common_type_t<float, T, C> AngleBetween(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
         return std::acos(CosineValueOfAngleBetween(lhs, rhs));
     }
