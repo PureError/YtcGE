@@ -9,14 +9,14 @@ namespace YtcGE
     struct Triangle
     {
         std::array<VertexPtr, 3> vertices;
+        Texture2D::Ptr texture;
     };
 
     struct Trapzoid
     {
         float top;
         float bottom;
-        std::array<VertexPtr, 2> edge_left;
-        std::array<VertexPtr, 2> edge_right;
+        std::array<std::array<VertexPtr, 2>, 2> edges;
     };
 
     class Renderer
@@ -34,7 +34,7 @@ namespace YtcGE
         void DrawPoint(const Point2i & coordOnScreen, const ColorF & color) noexcept;
         void DrawTriangle(const Triangle & t) noexcept;
     private:
-        std::array<Trapzoid, 2> SplitTriangle(const Triangle & t) noexcept;
+        std::array<Trapzoid, 2> SplitTriangle(Triangle t) noexcept;
         Renderer();
     };
 }

@@ -196,6 +196,20 @@ namespace YtcGE
                    ((std::get<2>(rgba)) <<  8) | ((std::get<3>(rgba)) <<  0);
         }
 
+
+        Color_T& operator+=(const Color_T & rhs) noexcept
+        {
+            this->vec += rhs.vec;
+            return *this;
+        }
+
+        Color_T& operator-=(const Color_T & rhs) noexcept
+        {
+            this->vec -= rhs.vec;
+            return *this;
+        }
+
+
         Vector_T vec;
     };
 
@@ -228,6 +242,7 @@ namespace YtcGE
     {
         return c.vec / d;
     }
+
     using ColorF = Color<float>; 
     using Color32b =  Color<uint8_t>;
     template<typename T>

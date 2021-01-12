@@ -18,7 +18,6 @@ using namespace std;
 UniquePtr<Application> App;
 int main(int argc, const Char* argv[])
 {
-    auto img = Image::FromFile("Snipaste_2021-01-09_10-23-03.bmp");
     std::vector<String> cmdArgs(argc);
     std::copy(argv, argv + argc, cmdArgs.begin());
     App = Application::Create(cmdArgs);

@@ -17,14 +17,15 @@ namespace YtcGE
         return std::abs(val);
     }
 
+
     template<typename A, typename B>
-    constexpr inline std::common_type_t<A, B> Min(const A & a, const B & b) noexcept
+    constexpr inline auto Min(const A & a, const B & b) noexcept -> decltype(a < b ? a : b)
     {
         return a < b ? a : b;
     }
 
     template<typename A, typename B>
-    constexpr inline std::common_type_t<A, B> Max(const A & a, const B & b) noexcept
+    constexpr inline auto Max(const A & a, const B & b) noexcept -> decltype(a > b ? a : b)
     {
         return a > b ? a : b;
     }

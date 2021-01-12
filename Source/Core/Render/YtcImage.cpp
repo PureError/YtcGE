@@ -10,7 +10,8 @@ namespace YtcGE
     Image::Ptr Image::FromFile(const String & filepath)
     {
         Image::Format fmt;
-        ifstream inf(filepath);
+        ifstream inf(filepath, std::ios::binary);
+        inf.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         if (!inf.is_open())
         {
             throw Exception(_T("Failed to open file :") + filepath);
@@ -48,23 +49,24 @@ namespace YtcGE
             i.bit_count = bih.bit_count;
             i.compression = bih.compression;
             auto bytes_count = i.bit_count >> 3;
-            i.stride = ((i.width * bytes_count) + 3) & ~3;
-            auto size = i.stride * i.width;
+            auto stride = ((i.width * bytes_count) + 3) & ~3;
+            auto size = 4 * i.width * i.height; //i.stride * i.width;
             i.data.resize(size);
-            const auto len_row = i.width * bytes_count;
-            std::vector<char> row(i.width * len_row);
+            std::vector<char> row(stride);
             inf.seekg(bfh.off_bits, std::ios::beg);
             for (uint32_t y = 0; y < i.height; ++y)
             {
-                inf.read(row.data(), len_row);
+                inf.read(row.data(), stride);
+                auto dst_row_begin = y * i.width * 4;
                 for (uint32_t x = 0; x < i.width; ++x)
                 {
-                    auto diff = y * i.width + x;
-                    auto src = *reinterpret_cast<uint8_t*>(row.data() + diff);
-                    auto dst = reinterpret_cast<uint8_t*>(i.data.data() + diff);
-                    uint32_t pixel = 0xFF;
-                    memcpy(&pixel, &src, bytes_count);
-                    *dst = ((pixel & 0x0000FF00) << 16) | (pixel & 0x00FF0000) | ((pixel & 0xFF000000) >> 16);
+                    auto diff_dst = dst_row_begin + x * 4;
+                    auto src = reinterpret_cast<uint8_t*>(row.data() + x * bytes_count);
+                    auto dst = reinterpret_cast<uint8_t*>(i.data.data() + diff_dst);
+                    uint32_t pixel = 0xFF000000;
+                    memcpy(&pixel, src, bytes_count);
+                    pixel = ((pixel & 0x000000FF) << 16) | (pixel & 0x0000FF00) | ((pixel & 0x00FF0000) >> 16) | ((pixel & 0xFF000000));
+                    *reinterpret_cast<uint32_t*>(dst) = pixel;
                 }
             }
             fmt = Format::BMP;

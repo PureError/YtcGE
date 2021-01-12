@@ -39,35 +39,55 @@ namespace YtcGE
     void Renderer::DrawTriangle(const Triangle & t) noexcept
     {
         auto traps = SplitTriangle(t);
-
+        const auto * texture = t.texture.get();
+        HWND hwnd = App->MainWindow()->Handle();
+        HDC hdc = ::GetDC(hwnd);
         for (auto & trap : traps)
         {
             int h = static_cast<int>(trap.bottom - trap.top + 0.5f);
-            auto & left_v0 = *trap.edge_left[0];
-            auto & left_v1 = *trap.edge_left[1];
-            auto & right_v0 = *trap.edge_right[0];
-            auto & right_v1 = *trap.edge_right[1];
+            auto & e0_v0 = *trap.edges[0][0];
+            auto & e0_v1 = *trap.edges[0][1];
+            auto & e1_v0 = *trap.edges[1][0];
+            auto & e1_v1 = *trap.edges[1][1];
 
-            float h_left = left_v1.position.Y() - left_v0.position.Y();
-            float h_right = right_v1.position.Y() - right_v0.position.Y();
+            float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
+            float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
 
-            for (int y_steps = 0; y_steps <= h; ++y_steps)
+            for (int pos_y = trap.top; pos_y <= trap.bottom; ++pos_y)
             {
-                auto vtx_left = Lerp(left_v0, left_v1, (float)y_steps / h_left);
-                auto vtx_right = Lerp(right_v0, right_v1, (float)y_steps / h_right);
+                auto vtx_0 = Lerp(e0_v0, e0_v1, (float)(pos_y - e0_v0.position.Y()) / h_0);
+                auto vtx_1 = Lerp(e1_v0, e1_v1, (float)(pos_y - e1_v0.position.Y()) / h_1);
 
-                auto w = vtx_right.position.X() - vtx_left.position.X();
-                
+                int w = int(vtx_1.position.X() + 0.5f) - int(vtx_0.position.X() + 0.5f);
+                int abs_w = Abs(w);
+                auto stride_position = (vtx_1.position - vtx_0.position) / abs_w;
+                auto stride_color = (vtx_1.color - vtx_0.color) / abs_w;
+                auto stride_texcoord = (vtx_1.texcoord - vtx_0.texcoord) / abs_w;
+                auto vtx = vtx_0;
+                int total_steps = abs_w + 1;
+                while(total_steps > 0)
+                {
+                    auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
+                    int x = static_cast<int>(vtx.position.X() + 0.5f);
+                    int y = static_cast<int>(vtx.position.Y() + 0.5f);
+                    COLORREF rgb = RGB(clr_tex.R(), clr_tex.G(), clr_tex.B());
+                    ::SetPixel(hdc, x, y, rgb);
+                    vtx.position += stride_position;
+                    //vtx_left.color += stride_color;
+                    vtx.texcoord += stride_texcoord;
+                    --total_steps;
+                }
             }
         }
+        ::ReleaseDC(hwnd, hdc);
     }
 
 
-    std::array<YtcGE::Trapzoid, 2> Renderer::SplitTriangle(const Triangle & t) noexcept
+    std::array<YtcGE::Trapzoid, 2> Renderer::SplitTriangle(Triangle t) noexcept
     {
-        std::sort(t.vertices.begin(), t.vertices.end(), [](const Vertex & lhs, const Vertex & rhs)
+        std::sort(t.vertices.begin(), t.vertices.end(), [](const VertexPtr & lhs, const VertexPtr & rhs)
         {
-            return lhs.position.Y() < rhs.position.Y();
+            return lhs->position.Y() < rhs->position.Y();
         });
         const auto & v0 = t.vertices[0];
         const auto & v1 = t.vertices[1];
@@ -77,17 +97,17 @@ namespace YtcGE
         auto & t2 = trapzoids[1];
         t1.top = v0->position.Y();
         t1.bottom = v1->position.Y();
-        t1.edge_left[0] = v0;
-        t1.edge_left[1] = v1;
-        t2.edge_right[0] = v0;
-        t2.edge_right[1] = v2;
+        t1.edges[0][0] = v0;
+        t1.edges[0][1] = v1;
+        t1.edges[1][0] = v0;
+        t1.edges[1][1] = v2;
 
         t2.top = v1->position.Y();
         t2.bottom = v2->position.Y();
-        t2.edge_left[0] = v1;
-        t2.edge_left[1] = v2;
-        t2.edge_right[0] = v0;
-        t2.edge_right[1] = v2;
+        t2.edges[0][0] = v1;
+        t2.edges[0][1] = v2;
+        t2.edges[1][0] = v0;
+        t2.edges[1][1] = v2;
 
         return trapzoids;
     }

@@ -21,7 +21,7 @@ namespace YtcGE
         static Ptr FromFile(const String & filepath);
         uint32_t width;
         uint32_t height;
-        uint32_t stride;
+        //uint32_t stride;
         uint32_t bit_count;
         uint32_t compression;
         Format format;
