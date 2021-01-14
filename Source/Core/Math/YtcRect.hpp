@@ -13,14 +13,14 @@ namespace YtcGE
         enum BorderIndex
         {
             LEFT = 0,
-            BOTTOM,
-            RIGHT,
             TOP,
+            RIGHT,
+            BOTTOM,
         };
     public:
         using Rect_T = Rect<T>;
         constexpr Rect() noexcept = default;
-        constexpr Rect(T left, T bottom, T right, T top) noexcept
+        constexpr Rect(T left, T top, T right, T bottom) noexcept
         {
             Left() = left;
             Bottom() = bottom;
@@ -78,12 +78,12 @@ namespace YtcGE
             return data_[RIGHT];
         }
         
-        constexpr const T& Right() noexcept
+        constexpr const T& Right() const noexcept
         {
             return data_[RIGHT];
         }
 
-        T& Top() const
+        T& Top()
         {
             return data_[TOP];
         }
@@ -95,7 +95,7 @@ namespace YtcGE
 
         constexpr T Width() const noexcept
         {
-            return Left() - Right();
+            return Right() - Left();
         }
 
         constexpr T Height() const noexcept

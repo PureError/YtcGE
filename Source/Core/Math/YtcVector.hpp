@@ -339,13 +339,24 @@ namespace YtcGE
         return result;
     }
 
-    template<typename T, typename C, size_t N>
+    template<typename T, typename C, int N>
     inline Vector<std::common_type_t<T, C>, N> operator-(const Vector<T, N>& lhs, const Vector<C, N>& rhs) noexcept
     {
         using FinalType = std::common_type_t<T, C>;
         Vector<FinalType, N> result;
         Sub(lhs, rhs, result);
         return result;
+    }
+
+    template<typename T, int N>
+    inline Vector<T, N> operator-(const Vector<T, N> & v) noexcept
+    {
+        Vector<T, N> ret;
+        for (int i = 0; i < N; ++i)
+        {
+            ret[i] = T(0) - v[i];
+        }
+        return ret;
     }
 
     template<typename T, typename C, int N>
@@ -466,6 +477,17 @@ namespace YtcGE
         {
             (*this) /= len;
         }
+    }
+
+    template<typename T>
+    inline Vector<T, 3> Cross(const Vector<T, 3> & lhs, const Vector<T, 3> & rhs) noexcept
+    {
+        return 
+        {
+            lhs[1] * rhs[2] - lhs[2] * rhs[1],
+            lhs[2] * rhs[0] - lhs[0] * rhs[2],
+            lhs[0] * rhs[1] - lhs[1] * rhs[0],
+        };
     }
 
     using Vec2i = Vector<int, 2>;

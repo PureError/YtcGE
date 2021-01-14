@@ -40,8 +40,7 @@ namespace YtcGE
     {
         auto traps = SplitTriangle(t);
         const auto * texture = t.texture.get();
-        HWND hwnd = App->MainWindow()->Handle();
-        HDC hdc = ::GetDC(hwnd);
+        auto & render_buffer = App->MainWindow()->RenderBuffer();
         for (auto & trap : traps)
         {
             int h = static_cast<int>(trap.bottom - trap.top + 0.5f);
@@ -53,7 +52,7 @@ namespace YtcGE
             float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
             float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
 
-            for (int pos_y = trap.top; pos_y <= trap.bottom; ++pos_y)
+            for (int pos_y = static_cast<int>(trap.top + 0.5f); pos_y <= trap.bottom; ++pos_y)
             {
                 auto vtx_0 = Lerp(e0_v0, e0_v1, (float)(pos_y - e0_v0.position.Y()) / h_0);
                 auto vtx_1 = Lerp(e1_v0, e1_v1, (float)(pos_y - e1_v0.position.Y()) / h_1);
@@ -68,10 +67,10 @@ namespace YtcGE
                 while(total_steps > 0)
                 {
                     auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
-                    int x = static_cast<int>(vtx.position.X() + 0.5f);
-                    int y = static_cast<int>(vtx.position.Y() + 0.5f);
-                    COLORREF rgb = RGB(clr_tex.R(), clr_tex.G(), clr_tex.B());
-                    ::SetPixel(hdc, x, y, rgb);
+                    uint32_t x = static_cast<uint32_t>(vtx.position.X() + 0.5f);
+                    uint32_t y = static_cast<uint32_t>(vtx.position.Y() + 0.5f);
+                    uint32_t color = (clr_tex.R() << 24) | (clr_tex.G() << 16) | (clr_tex.B() << 8) | clr_tex.A();
+                    render_buffer.SetPixel(x, y, color);
                     vtx.position += stride_position;
                     //vtx_left.color += stride_color;
                     vtx.texcoord += stride_texcoord;
@@ -79,7 +78,7 @@ namespace YtcGE
                 }
             }
         }
-        ::ReleaseDC(hwnd, hdc);
+
     }
 
 

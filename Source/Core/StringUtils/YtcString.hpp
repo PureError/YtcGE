@@ -27,6 +27,13 @@ namespace YtcGE
     public:
         using Base = StringBase<C, T, A>;
         using MyType = String_T<C, T, A>;
+        
+        static const MyType & Emtpy() noexcept
+        {
+            static MyType emtpy;
+            return emtpy;
+        }
+
         String_T() noexcept = default;
         String_T(const A& _allocator) noexcept : Base(_allocator)
         {

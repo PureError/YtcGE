@@ -29,7 +29,7 @@ namespace YtcGE
 
         static UniquePtr<Application> Create(const std::vector<String> & cmdArgs);
 
-        WindowPtr MainWindow()
+        WindowPtr MainWindow() noexcept
         {
             return win_;
         }

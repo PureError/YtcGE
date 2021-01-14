@@ -464,8 +464,39 @@ namespace YtcGE
                 0, 0, 0, 1
             };
         }
-    };
 
+    };
+    //[1, 0, 0, 0]                      [axis_x.x, axis_y.x, axis_z.x, 0]
+    //[0, 1, 0, 0]                   *  [axis_x.y, axis_y.y, axis_z.y, 0]
+    //[0, 0, 1, 0]                      [axis_x.z, axis_y.z, axis_z.z, 0]
+    //[-eye.x, -eye.y, -eye.z, 1]       [0       , 0       , 0       , 1]
+    inline Mat44f LookAtLH(const Vec3f & eye, const Vec3f & at, const Vec3f & up) noexcept
+    {
+        auto axis_z = Normalize(at - eye);
+        auto axis_x = Normalize(Cross(axis_z, up));
+        auto axis_y = Normalize(Cross(axis_x, axis_z));
+        auto neg_eye = -eye;
+        return 
+        {
+            { axis_x.X()          ,   axis_y.X()          ,       axis_z.X()          ,        0 },
+            { axis_x.Y()          ,   axis_y.Y()          ,       axis_z.Y()          ,        0 },
+            { axis_x.Z()          ,   axis_y.Z()          ,       axis_z.Z()          ,        0 },
+            { Dot(axis_x, neg_eye),   Dot(axis_y, neg_eye),       Dot(axis_z, neg_eye),        1 },
+        };
+    }
+
+    inline Mat44f PerspectiveProjectionLH(float fov, float aspect_ratio, float z_near, float z_far) noexcept
+    {
+        auto y_scale = 1 / std::tan(fov / 2);
+        auto x_scale = y_scale / aspect_ratio;
+        return 
+        {
+            { x_scale, 0.0f   , 0.0f                             , 0.0f },
+            { 0.0f   , y_scale, 0.0f                             , 0.0f },
+            { 0.0f   , 0.0f   , z_far / (z_far - z_near)         , 0.0f },
+            { 0.0f   , 0.0f   , z_near * z_far / (z_near - z_far), 0.0f },
+        };
+    }
 }
 
 #endif

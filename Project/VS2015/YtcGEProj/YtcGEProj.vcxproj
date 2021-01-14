@@ -20,7 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcCamera.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp" />
@@ -32,6 +36,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
@@ -43,8 +49,10 @@
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp" />

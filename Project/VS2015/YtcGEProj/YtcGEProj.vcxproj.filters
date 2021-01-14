@@ -29,6 +29,18 @@
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp">
       <Filter>Source\Core\Render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcCamera.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -63,6 +75,9 @@
     </Filter>
     <Filter Include="Source\Core\Render">
       <UniqueIdentifier>{f30cd74d-e395-42d5-98e0-bc3ff07c45e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Entity">
+      <UniqueIdentifier>{7c33dd6a-bc9b-43f8-a36a-395eafa5533d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -143,6 +158,18 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp">
       <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp">
+      <Filter>Source\Core\Entity</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

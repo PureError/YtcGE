@@ -89,6 +89,7 @@ void YtcGE::Application::Run()
             //t[2] = { 200, 500 };
             //Renderer::Get().DrawTriangle2D(t, { 0.0f, 0.0f, 255.0f, 0.0f });
             Renderer::Get().DrawTriangle(triangle);
+            win_->Update();
             std::this_thread::sleep_for(chrono::microseconds(30));
         }
     }
