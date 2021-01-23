@@ -31,7 +31,7 @@ namespace YtcGE
             BitmapInfoHeader bih = {};
             bih.size = size_info_header;
             inf.read((char*)(&bih) + (sizeof(bih.size)), size_info_header - sizeof(bih.size));
-            TEMP_LOG("bmp header size:%d, file size:%d, data offset:%d,"
+            YTC_LOG("bmp header size:%d, file size:%d, data offset:%d,"
                      "width:%d, height:%d, planes:%d£¬bitcount:%d, compression:%d, imgage size:%d",
                      size_info_header, bfh.size, bfh.off_bits, bih.width, bih.height, bih.planes,
                      bih.bit_count, bih.compression, bih.size_image);
@@ -73,7 +73,7 @@ namespace YtcGE
         }
         else
         {
-            throw Exception(_T("Sorry, no implemention for this img format!"));
+            throw Exception(_T("Sorry, no implemention for this image-format!"));
         }
         return img;
     }

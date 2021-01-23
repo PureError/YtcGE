@@ -6,6 +6,8 @@
 #include "../Utility/Localization.hpp"
 namespace YtcGE
 {
+
+
     struct Vertex
     {
         Point4f position;
@@ -13,8 +15,9 @@ namespace YtcGE
         Vec2f texcoord;
     };
 
+
     template<>
-    constexpr inline Vertex Lerp<Vertex>(const Vertex & v1, const Vertex & v2, float s) noexcept
+    inline Vertex Lerp<Vertex>(const Vertex & v1, const Vertex & v2, float s) noexcept
     {
         return
         {

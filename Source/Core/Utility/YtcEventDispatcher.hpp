@@ -4,6 +4,7 @@
 #ifndef YTC_EVENT_DISPATCHER_HPP
 #define YTC_EVENT_DISPATCHER_HPP
 
+#include "../StringUtils/YtcString.hpp"
 #include <vector>
 #include <functional>
 #include <unordered_map>

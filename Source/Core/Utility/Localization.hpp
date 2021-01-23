@@ -1,7 +1,12 @@
 #ifndef _LOCALIZATION_HPP
 #define _LOCALIZATION_HPP
 
+#include "../StringUtils/YtcString.hpp"
 #include <memory>
+#include <cassert>
+#define YTC_RT_ASSERT assert
+#define YTC_STATIC_ASSERT static_assert
+
 namespace YtcGE
 {
     template<typename T>

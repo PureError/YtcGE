@@ -1,7 +1,7 @@
-
-#include "TestVector.hpp"
-#include "TestString.hpp"
-#include "TestMatrix.hpp"
+//#include "TestVector.hpp"
+//#include "TestString.hpp"
+//#include "TestMatrix.hpp"
+//#include "TestSingleton.hpp"
 #include <core/Utility/YtcEventDispatcher.hpp>
 
 

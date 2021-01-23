@@ -384,19 +384,36 @@ namespace YtcGE
         return result;
     }
 
+    template<typename T, typename U, int N, int C>
+    inline Vector<T, N>& operator*=(Vector<T, N>& v, const Matrix<U, N, C>& m) noexcept
+    {
+        const Vector<T, N> v_copy(v);
+        for(int i = 0; i < C; ++i)
+        {
+            v[i] = Dot(v_copy, m.ColVector(i));
+        }
+        return v;
+    }
+
     template<typename T, int N>
     struct SquareMatrixHelper
     {
         using Matrix_T = YtcGE::Matrix<T, N, N>;
 
-        static const Matrix_T Identity() noexcept
+        static Matrix_T Identity() noexcept
         {
-            Matrix_T m(0);
+            Matrix_T m;
+            SetIdentity(m);
+            return m;
+        }
+        
+        static void SetIdentity(Matrix_T & m) noexcept
+        {
+            std::memset(&m, 0, sizeof(T) * N * N);
             for (int i = 0; i < N; ++i)
             {
                 m[i][i] = T(1);
             }
-            return m;
         }
     };
 
@@ -434,15 +451,15 @@ namespace YtcGE
                 0, ny, 0, 0,
                 0, 0, nz, 0,
                 0, 0, 0, 1,
-            }
+            };
         }
 
-        static constexpr Mat Rotatation(const Vector<T, 4>& direction, float theta) noexcept
+        static constexpr Mat Rotatation(const Vector<T, 3>& direction, float theta) noexcept
         {
             return Rotatation(direction[0], direction[1], direction[2], theta);
         }
 
-        static constexpr Mat Rotatation(T x, T y, T z, float theta) noexcept
+        static Mat Rotatation(T x, T y, T z, float theta) noexcept
         {
             auto cosTheta = std::cos(theta);
             auto sinTheta = std::sin(theta);
@@ -473,15 +490,15 @@ namespace YtcGE
     inline Mat44f LookAtLH(const Vec3f & eye, const Vec3f & at, const Vec3f & up) noexcept
     {
         auto axis_z = Normalize(at - eye);
-        auto axis_x = Normalize(Cross(axis_z, up));
-        auto axis_y = Normalize(Cross(axis_x, axis_z));
+        auto axis_x = Normalize(Cross(up, axis_z));
+        auto axis_y = Normalize(Cross(axis_z, axis_x));
         auto neg_eye = -eye;
         return 
         {
-            { axis_x.X()          ,   axis_y.X()          ,       axis_z.X()          ,        0 },
-            { axis_x.Y()          ,   axis_y.Y()          ,       axis_z.Y()          ,        0 },
-            { axis_x.Z()          ,   axis_y.Z()          ,       axis_z.Z()          ,        0 },
-            { Dot(axis_x, neg_eye),   Dot(axis_y, neg_eye),       Dot(axis_z, neg_eye),        1 },
+            { axis_x.X()          ,   axis_y.X()          ,       axis_z.X()          ,        0.0f },
+            { axis_x.Y()          ,   axis_y.Y()          ,       axis_z.Y()          ,        0.0f },
+            { axis_x.Z()          ,   axis_y.Z()          ,       axis_z.Z()          ,        0.0f },
+            { Dot(axis_x, neg_eye),   Dot(axis_y, neg_eye),       Dot(axis_z, neg_eye),        1.0f },
         };
     }
 
@@ -493,7 +510,7 @@ namespace YtcGE
         {
             { x_scale, 0.0f   , 0.0f                             , 0.0f },
             { 0.0f   , y_scale, 0.0f                             , 0.0f },
-            { 0.0f   , 0.0f   , z_far / (z_far - z_near)         , 0.0f },
+            { 0.0f   , 0.0f   , z_far / (z_far - z_near)         , 1.0f },
             { 0.0f   , 0.0f   , z_near * z_far / (z_near - z_far), 0.0f },
         };
     }

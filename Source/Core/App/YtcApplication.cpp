@@ -1,6 +1,8 @@
 #include "YtcApplication.hpp"
 #include "../Utility/Localization.hpp"
 #include "../Render/YtcRenderer.hpp"
+#include "../Entity/YtcSceneManager.hpp"
+#include "../Entity/YtcCube.hpp"
 #include <thread>
 #include <random>
 
@@ -22,28 +24,7 @@ YtcGE::UniquePtr<YtcGE::Application> YtcGE::Application::Create(const std::vecto
 void YtcGE::Application::Run()
 {
     win_ = MakeWindow();
-
-    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
-    Triangle triangle;
-    triangle.texture = std::make_shared<Texture2D>(img);
-    auto v0 = make_shared<Vertex>();
-    auto v1 = make_shared<Vertex>();
-    auto v2 = make_shared<Vertex>();
-    v0->position.X() = 200.0f;
-    v0->position.Y() = 20.0f;
-    v0->texcoord.U() = 0.0f;
-    v0->texcoord.V() = 0.0f;
-    v1->position.X() = 400.0f;
-    v1->position.Y() = 300.0f;
-    v1->texcoord.U() = 0.5f;
-    v1->texcoord.V() = 0.5f;
-    v2->position.X() = 100.0f;
-    v2->position.Y() = 400.0f;
-    v2->texcoord.U() = 1.0f;
-    v2->texcoord.V() = 1.0f;
-    triangle.vertices[0] = std::move(v0);
-    triangle.vertices[1] = std::move(v1);
-    triangle.vertices[2] = std::move(v2);
+    CreateSceneForTest();
 
     UniquePtr<MSG> msg = MakeUnique<MSG>();
     auto hwnd = win_->Handle();
@@ -67,29 +48,8 @@ void YtcGE::Application::Run()
         }
         else
         {
-            //render
-            //unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-            //std::mt19937 generator(seed);
-            //auto w = win_->Width();
-            //auto h = win_->Height();
-            //uniform_int_distribution<int> distX(1, w);
-            //uniform_int_distribution<int> distY(1, h);
-            //const int pointCount = 100;
-            //for (int i = 0; i < pointCount; ++i)
-            //{
-            //    Point2i pt{ distX(generator), distY(generator) };
-            //    ColorF color{ 0.0f, 0.0f, 0.0f, 0.0f };
-            //    Renderer::Get().DrawPoint(pt, color);
-            //}
-
-            //Renderer::Get().DrawLine2D({ 20, 20 }, { 300, 300 }, { 0.0f, 255.0f, 0.0f, 0.0f });
-            //std::array<Point2i, 3> t;
-            //t[0] = { 20, 20 };
-            //t[1] = { 400, 300 };
-            //t[2] = { 200, 500 };
-            //Renderer::Get().DrawTriangle2D(t, { 0.0f, 0.0f, 255.0f, 0.0f });
-            Renderer::Get().DrawTriangle(triangle);
             win_->Update();
+            SceneManager::Instance().Update();
             std::this_thread::sleep_for(chrono::microseconds(30));
         }
     }
@@ -105,5 +65,32 @@ YtcGE::Application::Application(UniquePtr<RuntimeInfo>&& runtimeInfo) : rtInfo_(
 
 YtcGE::Application::~Application()
 {
+}
+
+void YtcGE::Application::CreateSceneForTest()
+{
+    String scene_name = _T("TestScene");
+    auto scene = MakeShared<Scene>(scene_name);
+    CameraPtr cam = MakeShared<Camera>();
+    cam->AdjustProjectionParam(DegreesToRadians(45.0f), 4.0f / 3, 0.1f, 1.0f);
+    auto & s = *scene;
+    std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
+    tex_coords[0] = { 0.1f, 0.2f };
+    tex_coords[1] = { 0.8f, 0.4f };
+    tex_coords[2] = { 0.9f, 0.4f };
+    tex_coords[3] = { 0.5f, 0.5f };
+    tex_coords[4] = { 0.7f, 0.1f };
+    tex_coords[5] = { 0.3f, 0.6f };
+    tex_coords[6] = { 0.6f, 0.9f };
+    tex_coords[7] = { 0.2f, 0.8f };
+    auto cube = MakeShared<Cube>(0.8f, 0.8f, 0.8f);
+    cube->TextureCoord(tex_coords);
+    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+    cube->Texture(MakeShared<Texture2D>(img));
+    //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
+    s.AddNode(cube);
+    s.AddCamera(_T("TestCamera"), cam, true);
+    SceneManager::Instance().AddScene(scene);
+    SceneManager::Instance().ReplaceScence(scene_name);
 }
 

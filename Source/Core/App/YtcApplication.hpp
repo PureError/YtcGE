@@ -3,7 +3,6 @@
 
 #include "../StringUtils/YtcString.hpp"
 #include "../Window/YtcWindow.hpp"
-
 #include <vector>
 
 namespace YtcGE
@@ -38,6 +37,7 @@ namespace YtcGE
         explicit Application(UniquePtr<RuntimeInfo>&& runtimeInfo);
         ~Application();
     private:
+        void CreateSceneForTest();
         WindowPtr win_;
         RuntimeInfoPtr rtInfo_;
     };

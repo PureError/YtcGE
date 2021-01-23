@@ -4,6 +4,7 @@
 #include "../Math/YtcPoint.hpp"
 #include "../Math/YtcRect.hpp"
 #include "../Math/YtcMatrix.hpp"
+#include "../Utility/Localization.hpp"
 #include <memory>
 namespace YtcGE
 {
@@ -107,6 +108,8 @@ namespace YtcGE
         mutable Mat44f view_proj_;
         mutable bool view_dirty_ = true;
     };
+
+    using CameraPtr = SharedPtr<Camera>;
 }
 
 #endif

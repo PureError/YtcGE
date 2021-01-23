@@ -20,5 +20,5 @@ namespace YtcGE
 
 }
 
-#define TEMP_LOG(fmt, ...) ::YtcGE::PrintLog(fmt, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define YTC_LOG(fmt, ...) ::YtcGE::PrintLog(fmt, __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__)
 #endif

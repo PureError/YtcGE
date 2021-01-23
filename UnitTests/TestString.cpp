@@ -36,6 +36,6 @@ static void TestTrim()
 
 void DoTestString()
 {
-    TEMP_LOG("Start string test:");
+    YTC_LOG("Start string test:");
     TestTrim();
 }

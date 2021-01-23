@@ -6,12 +6,12 @@ using namespace std;
 namespace YtcGE
 {
 
-    YtcGE::Texture2D::~Texture2D()
+    YtcGE::Texture2D::~Texture2D() noexcept
     {
 
     }
 
-    Texture2D::Texture2D(Image::Ptr image) : img_(std::move(image))
+    Texture2D::Texture2D(Image::Ptr image) noexcept: img_(std::move(image))
     {
 
     }

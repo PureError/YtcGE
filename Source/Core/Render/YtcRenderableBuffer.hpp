@@ -38,6 +38,16 @@ namespace YtcGE
             return width_ * height_ * Stride;
         }
 
+        constexpr uint32_t Width() const noexcept
+        {
+            return width_;
+        }
+
+        constexpr uint32_t Height() const noexcept
+        {
+            return height_;
+        }
+
     private:
         Pixel * buffer_;
         uint32_t size_;

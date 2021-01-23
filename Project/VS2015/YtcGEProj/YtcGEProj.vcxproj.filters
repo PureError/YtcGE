@@ -32,14 +32,26 @@
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp">
       <Filter>Source\Core\Render</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Source\Core\Render\YtcCamera.cpp">
-      <Filter>Source\Core\Render</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp">
       <Filter>Source\Core\Entity</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp">
       <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcSceneManager.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestSingleton.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCamera.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp">
+      <Filter>Source\Core\Render</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp">
       <Filter>Source\Core\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Source\Core\StringUtils\Stringfication.hpp">
-      <Filter>Source\Core\StringUtils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp">
       <Filter>Source\Core\StringUtils</Filter>
@@ -162,14 +171,35 @@
     <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp">
       <Filter>Source\Core\Render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp">
-      <Filter>Source\Core\Render</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp">
       <Filter>Source\Core\Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp">
       <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcSceneManager.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcUncopyable.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestSingleton.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcModel.hpp">
+      <Filter>Source\Core\Render</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

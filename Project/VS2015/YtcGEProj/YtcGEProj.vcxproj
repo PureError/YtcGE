@@ -20,10 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCamera.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp" />
-    <ClCompile Include="..\..\..\Source\Core\Render\YtcCamera.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcSceneManager.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp" />
@@ -31,13 +34,16 @@
     <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp" />
     <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestSingleton.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestString.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcSceneManager.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
@@ -52,17 +58,21 @@
     <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcModel.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp" />
-    <ClInclude Include="..\..\..\Source\Core\StringUtils\Stringfication.hpp" />
     <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\Localization.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcUncopyable.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Window\YtcWindow.hpp" />
     <ClInclude Include="..\..\..\UnitTests\TestMatrix.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestSingleton.hpp" />
     <ClInclude Include="..\..\..\UnitTests\TestString.hpp" />
     <ClInclude Include="..\..\..\UnitTests\TestVector.hpp" />
   </ItemGroup>

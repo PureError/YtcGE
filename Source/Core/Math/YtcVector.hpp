@@ -274,8 +274,8 @@ namespace YtcGE
 
         template<typename C> Vector_T& operator+=(const Vector<C, N>& other) noexcept;
         template<typename C> Vector_T& operator-=(const Vector<C, N>& other) noexcept;
-        template<typename C> Vector_T& operator*=(C scale) noexcept;
-        template<typename C> Vector_T& operator/=(C divisor) noexcept;
+        //template<typename C, std::enable_if_t<std::is_arithmetic<C>::value, bool> = true> Vector_T& operator*=(C scale) noexcept;
+        //template<typename C, std::enable_if_t<std::is_arithmetic<C>::value, bool> = true> Vector_T& operator/=(C divisor) noexcept;
 
         void Normalize() noexcept;
     private:
@@ -397,20 +397,33 @@ namespace YtcGE
         return *this;
     }
 
-    template<typename T, int N>
-    template<typename C>
-    inline Vector<T, N>& Vector<T, N>::operator*=(C scale) noexcept
+    //template<typename T, int N>
+    //template<typename C>
+    //inline Vector<T, N>& Vector<T, N>::operator*=(C scale) noexcept
+    //{
+    //    Mult(*this, scale, *this);
+    //    return *this;
+    //}
+
+    //template<typename T, int N>
+    //template<typename C>
+    //inline Vector<T, N>& Vector<T, N>::operator/=(C divisor) noexcept
+    //{
+    //    Div(*this, divisor, *this);
+    //    return *this;
+    //}
+    template<typename T, int N, typename C>
+    inline Vector<T, N> & operator*=(Vector<T, N>& v, C scale) noexcept
     {
-        Mult(*this, scale, *this);
-        return *this;
+        Mult(v, scale, v);
+        return v;
     }
 
-    template<typename T, int N>
-    template<typename C>
-    inline Vector<T, N>& Vector<T, N>::operator/=(C divisor) noexcept
+    template<typename T, int N, typename C>
+    inline Vector<T, N> & operator/=(Vector<T, N>& v, C scale) noexcept
     {
-        Div(*this, divisor, *this);
-        return *this;
+        Div(v, scale, v);
+        return v;
     }
 
     template<typename T, typename C, int N>

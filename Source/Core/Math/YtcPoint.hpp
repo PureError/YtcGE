@@ -4,12 +4,15 @@
 #include "YtcVector.hpp"
 namespace YtcGE
 {
-    using Point2f = Vec2f;
-    using Point2i = Vec2i;
-    using Point3f = Vec3f;
-    using Point3i = Vec3i;
-    using Point4i = Vec4i;
-    using Point4f = Vec4f;
+    
+    template<typename T, int N>
+    using Point_T = Vector<T, N>;
+    using Point2f = Point_T<float, 2>;
+    using Point2i = Point_T<int, 2>;
+    using Point3f = Point_T<float, 3>;
+    using Point3i = Point_T<int, 3>;
+    using Point4i = Point_T<int, 4>;
+    using Point4f = Point_T<float, 4>;
 }
 
 #endif

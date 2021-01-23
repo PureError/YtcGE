@@ -12,7 +12,7 @@ namespace YtcGE
     {
     public:
         using Ptr = std::shared_ptr<Texture2D>;
-        Texture2D(Image::Ptr image);
+        Texture2D(Image::Ptr image) noexcept;
         ~Texture2D() noexcept;
 
         uint32_t Width() const noexcept

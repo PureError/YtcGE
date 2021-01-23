@@ -1,7 +1,7 @@
 #ifndef YTC_RECT_HPP
 #define YTC_RECT_HPP
 
-#include "YtcVector.hpp"
+#include "YtcPoint.hpp"
 
 namespace YtcGE
 {
@@ -122,6 +122,13 @@ namespace YtcGE
         {
             return (Width() + Height()) * T(2);
         }
+
+        template<typename U>
+        constexpr bool Contains(const Point_T<U, 2> & pt) const noexcept
+        {
+            return !(pt.X() < Left() || pt.X() > Right() || pt.Y() < Top() || pt.Y() > Bottom());
+        }
+
     private:
         Vector<T, 4> data_;
     };

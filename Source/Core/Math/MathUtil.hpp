@@ -39,13 +39,13 @@ namespace YtcGE
     constexpr float Pi = 3.14159265358f;
 
     template<typename T>
-    constexpr inline std::common_type_t<float, T> AngleToRadians(T angle) noexcept
+    constexpr inline std::common_type_t<float, T> DegreesToRadians(T angle) noexcept
     {
         return angle * Pi / 180.0f;
     }
 
     template<typename T>
-    constexpr inline std::common_type_t<float, T> RadiansToAngle(T radians) noexcept
+    constexpr inline std::common_type_t<float, T> RadiansToDegrees(T radians) noexcept
     {
         return radians * 180.0f / Pi;
     }
