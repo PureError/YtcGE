@@ -72,7 +72,10 @@ void YtcGE::Application::CreateSceneForTest()
     String scene_name = _T("TestScene");
     auto scene = MakeShared<Scene>(scene_name);
     CameraPtr cam = MakeShared<Camera>();
-    cam->AdjustProjectionParam(DegreesToRadians(45.0f), 4.0f / 3, 0.1f, 1.0f);
+    auto w = win_->RenderBuffer().Width();
+    auto h = win_->RenderBuffer().Height();
+    auto aspect = w * 1.0f / h;
+    cam->AdjustProjectionParam(DegreesToRadians(45.0f), aspect, 1.0f, 500.0f);
     auto & s = *scene;
     std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
     tex_coords[0] = { 0.1f, 0.2f };
