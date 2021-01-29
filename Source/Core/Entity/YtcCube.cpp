@@ -1,5 +1,5 @@
 #include "YtcCube.hpp"
-
+#include <iostream>
 namespace YtcGE
 {
 
@@ -22,6 +22,7 @@ namespace YtcGE
         vertices[NEAR_BOTTOM_LEFT]->position = { -lwh_half.X(), -lwh_half.Y(), -lwh_half.Z(), 1.0f };
         vertices[NEAR_BOTTOM_RIGHT]->position = { lwh_half.X(), -lwh_half.Y(), -lwh_half.Z(), 1.0f };
 
+        model_.Dump(std::cout);
         model_.indices =
         {
             { 0, 1, 2 }, //far

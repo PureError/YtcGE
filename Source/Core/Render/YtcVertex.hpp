@@ -4,6 +4,7 @@
 #include "../Math/YtcPoint.hpp"
 #include "YtcColor.hpp"
 #include "../Utility/Localization.hpp"
+#include "../Log/YtcLog.hpp"
 namespace YtcGE
 {
 
@@ -13,6 +14,11 @@ namespace YtcGE
         Point4f position;
         ColorF color;
         Vec2f texcoord;
+        template<typename Stream>
+        void Dump(Stream & s) const noexcept
+        {
+            s << "position:[" << position.X() << "," << position.Y() << "," << position.Z() <<"]\n";
+        }
     };
 
 

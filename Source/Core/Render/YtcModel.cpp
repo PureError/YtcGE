@@ -6,7 +6,7 @@ namespace YtcGE
 {
     void Model::Rotate(const Vec3f& axis, float theta) noexcept
     {
-        this->Transform( _3DTransformHelper<float>::Rotatation(axis, theta));
+        this->Transform( _3DTransformHelper<float>::Rotation(axis, theta));
     }
 
     void Model::Scale(const Vec3f& s) noexcept
@@ -21,5 +21,7 @@ namespace YtcGE
             (vtx->position) *= mat;
         }
     }
+
+
 
 }

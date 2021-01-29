@@ -50,7 +50,7 @@ void YtcGE::Application::Run()
         {
             win_->Update();
             SceneManager::Instance().Update();
-            std::this_thread::sleep_for(chrono::microseconds(30));
+            std::this_thread::sleep_for(chrono::microseconds(300));
         }
     }
 
@@ -75,7 +75,7 @@ void YtcGE::Application::CreateSceneForTest()
     auto w = win_->RenderBuffer().Width();
     auto h = win_->RenderBuffer().Height();
     auto aspect = w * 1.0f / h;
-    cam->AdjustProjectionParam(DegreesToRadians(45.0f), aspect, 1.0f, 500.0f);
+    cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
     auto & s = *scene;
     std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
     tex_coords[0] = { 0.1f, 0.2f };
@@ -86,9 +86,10 @@ void YtcGE::Application::CreateSceneForTest()
     tex_coords[5] = { 0.3f, 0.6f };
     tex_coords[6] = { 0.6f, 0.9f };
     tex_coords[7] = { 0.2f, 0.8f };
-    auto cube = MakeShared<Cube>(0.8f, 0.8f, 0.8f);
+    auto cube = MakeShared<Cube>(2.0f, 2.0f, 2.0f);
+    cube->Translate(Vec3f{ 0.0f, 0.0f, 10.0f });
     cube->TextureCoord(tex_coords);
-    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+    auto img = Image::FromFile("./../../Resource/Images/hahah.bmp");
     cube->Texture(MakeShared<Texture2D>(img));
     //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
     s.AddNode(cube);

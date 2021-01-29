@@ -1,6 +1,8 @@
 #include "YtcSceneManager.hpp"
 #include "../Utility/YtcException.hpp"
 #include "../Render/YtcRenderer.hpp"
+#include "../Log/YtcLog.hpp"
+#include <iostream>
 namespace YtcGE
 {
     void SceneManager::AddScene(const ScenePtr& scene)
@@ -29,6 +31,7 @@ namespace YtcGE
 
     void SceneManager::Update()
     {
+        Renderer::Get().BackGround(ColorF(0.0f, 0.0f, 0.0f, 0.0f));
         auto scene_ptr = CurrentScene();
         if (scene_ptr)
         {
@@ -40,6 +43,7 @@ namespace YtcGE
             auto & nodes = s.Nodes();
             for (auto & n : nodes)
             {
+                n->Rotate(Normalize(Vec3f{ 0.0f, 1.0f, 0.0f }), DegreesToRadians(0.1f));
                 auto & model_data = n->ModelData();
                 auto & mvp = n->Model2Word() * mat_vp;
                 Renderer::Get().SetTransformMatrix(mvp);

@@ -99,7 +99,7 @@ namespace YtcGE
         float aspect_;
         float near_plane_;
         float far_plane_;
-        Point3f position_ = { 0.0f, 0.0f, -10.0f  };
+        Point3f position_ = { 0.0f, 0.0f, -3.0f  };
         Vec3f up_direction_ = { 0.0f, 1.0f, 0.0f };
         Point3f target_ = { 0.0f, 0.0f, 0.0f };
         mutable Mat44f view_;

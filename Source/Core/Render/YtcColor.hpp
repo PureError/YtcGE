@@ -2,6 +2,7 @@
 #define YTC_COLOR_HPP
 
 #include "../Math/YtcVector.hpp"
+#include <tuple>
 namespace YtcGE
 {
     template<typename T>
@@ -189,11 +190,13 @@ namespace YtcGE
                                    static_cast<uint8_t>(Clamp(A(), T(1), T(1) * 255 + 0.5f)));
         }
 
-        constexpr uint32_t ToUint32() const noexcept
+        uint32_t ToUint32() const noexcept
         {
             auto rgba = RGBA8888();
-            return ((std::get<0>(rgba)) << 24) | ((std::get<1>(rgba)) << 16) | 
-                   ((std::get<2>(rgba)) <<  8) | ((std::get<3>(rgba)) <<  0);
+#ifdef YTC_OS_WINDOWS
+            return ((std::get<0>(rgba)) << 0) | ((std::get<1>(rgba)) << 8) | 
+                   ((std::get<2>(rgba)) << 16) | ((std::get<3>(rgba)) << 24);
+#endif
         }
 
 

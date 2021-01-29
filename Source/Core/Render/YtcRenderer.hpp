@@ -20,6 +20,8 @@ namespace YtcGE
             static Renderer instance;
             return instance;
         }
+
+        void BackGround(const ColorF & color) noexcept;
         void DrawLine(const Point3f & from, const Point3f & to, const ColorF & color) noexcept;
         void DrawPoint(const Point3f & point, const ColorF & color) noexcept;
         void DrawLine2D(const Point2i & from, const Point2i & to, const ColorF & color)noexcept;

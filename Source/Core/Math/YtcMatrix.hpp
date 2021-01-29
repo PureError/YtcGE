@@ -454,31 +454,27 @@ namespace YtcGE
             };
         }
 
-        static constexpr Mat Rotatation(const Vector<T, 3>& direction, float theta) noexcept
+        static constexpr Mat Rotation(const Vector<T, 3>& direction, float theta) noexcept
         {
-            return Rotatation(direction[0], direction[1], direction[2], theta);
+            return Rotation(direction[0], direction[1], direction[2], theta);
         }
 
-        static Mat Rotatation(T x, T y, T z, float theta) noexcept
+        static Mat Rotation(T x, T y, T z, float theta) noexcept
         {
-            auto cosTheta = std::cos(theta);
-            auto sinTheta = std::sin(theta);
-            auto squareX = x * x;
-            auto squareY = y * y;
-            auto squareZ = z * z;
-            auto xy = x * y;
-            auto xz = x * z;
-            auto yz = y * z;
-            auto oneMinusCosTheta = 1.0f- cosTheta;
-            auto xSinTheta = x * sinTheta;
-            auto ySinTheta = y * sinTheta;
-            auto zSinTheta = z * sinTheta;
+            float sin_half_theta = (float)sin(theta * 0.5f);
+            float cos_half_theta = (float)cos(theta * 0.5f);
+            x = x * sin_half_theta;
+            y = y * sin_half_theta;
+            z = z * sin_half_theta;
+            auto xx = x * x;
+            auto yy = y * y;
+            auto zz = z * z;
             return 
             {
-                cosTheta + oneMinusCosTheta * squareX, oneMinusCosTheta * xy - zSinTheta, oneMinusCosTheta * xz + ySinTheta, 0,
-                oneMinusCosTheta * xy + zSinTheta, cosTheta + oneMinusCosTheta * squareY, oneMinusCosTheta * yz - xSinTheta, 0,
-                oneMinusCosTheta * xz + ySinTheta, oneMinusCosTheta * yz + xSinTheta, cosTheta + oneMinusCosTheta * squareZ, 0,
-                0, 0, 0, 1
+                { 1 - 2 * yy - 2 * zz, 2 * x * y + 2 * cos_half_theta * z, 2 * x * z - 2 * cos_half_theta * y, T(), },
+                { 2 * x * y - 2 * cos_half_theta * z, 1 - 2 * xx - 2 * zz, 2 * y * z + 2 * cos_half_theta * x, T(), },
+                { 2 * x * z + 2 * cos_half_theta * y, 2 * y * z - 2 * cos_half_theta * x, 1 - 2 * xx - 2 * yy, T(), },
+                { 0, 0, 0, 1 },
             };
         }
 

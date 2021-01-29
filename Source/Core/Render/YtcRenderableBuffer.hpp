@@ -10,7 +10,7 @@ namespace YtcGE
     public:
         RenderableBuffer(void * buffer, uint32_t w, uint32_t h) noexcept
             : buffer_(static_cast<Pixel*>(buffer)),
-              width_(w), height_(h)
+              width_(w), height_(h), size_(w * h)
         {
         }
 
@@ -28,14 +28,24 @@ namespace YtcGE
             buffer_[y * width_ + x] = value;
         }
 
+        void FillWith(Pixel pixel) noexcept
+        {
+            std::fill(buffer_, buffer_ + Size(), pixel);
+        }
+
         constexpr uint8_t* Buffer() const noexcept
         {
             return reinterpret_cast<uint8_t*>(buffer_);
         }
 
+        constexpr uint32_t SizeInBytes() const noexcept
+        {
+            return width_ * height_ * Stride();
+        }
+
         constexpr uint32_t Size() const noexcept
         {
-            return width_ * height_ * Stride;
+            return size_;
         }
 
         constexpr uint32_t Width() const noexcept
