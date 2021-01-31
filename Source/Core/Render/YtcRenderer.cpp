@@ -49,59 +49,67 @@ namespace YtcGE
         std::array<YtcGE::Trapzoid, 2> traps;
         int count_traps = SplitTriangle(vertices, traps);
         auto & render_buffer = App->MainWindow()->RenderBuffer();
-        for (int i = 0; i < count_traps; ++i)
+        if (texture)
         {
-            auto& trap = traps[i];
-            auto & e0_v0 = *trap.edges[0][0];
-            auto & e0_v1 = *trap.edges[0][1];
-            auto & e1_v0 = *trap.edges[1][0];
-            auto & e1_v1 = *trap.edges[1][1];
+			for (int i = 0; i < count_traps; ++i)
+			{
+				auto& trap = traps[i];
+				auto& e0_v0 = *trap.edges[0][0];
+				auto& e0_v1 = *trap.edges[0][1];
+				auto& e1_v0 = *trap.edges[1][0];
+				auto& e1_v1 = *trap.edges[1][1];
 
-            float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
-            float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
-            int top = static_cast<int>(trap.top + 0.5f);
-            int bottom = static_cast<int>(trap.bottom + 0.5f);
-            for (int pos_y = top; pos_y <= bottom; ++pos_y)
-            {
-                float s0 = (float)(pos_y - e0_v0.position.Y()) / h_0;
-                float s1 = (float)(pos_y - e1_v0.position.Y()) / h_1;
-                if (s0 < 0.0f || s1 < 0.0f) continue;
-                auto vtx_0 = Lerp(e0_v0, e0_v1, s0);
-                auto vtx_1 = Lerp(e1_v0, e1_v1, s1);
+				float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
+				float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
+				int top = static_cast<int>(trap.top + 0.5f);
+				int bottom = static_cast<int>(trap.bottom + 0.5f);
+				for (int pos_y = top; pos_y < bottom; ++pos_y)
+				{
+					float s0 = (static_cast<float>(pos_y) + 0.5f - e0_v0.position.Y()) / h_0;
+					float s1 = (static_cast<float>(pos_y) + 0.5f - e1_v0.position.Y()) / h_1;
+					auto vtx_0 = Lerp(e0_v0, e0_v1, s0);
+					auto vtx_1 = Lerp(e1_v0, e1_v1, s1);
 
-                int w = int(vtx_1.position.X() + 0.5f) - int(vtx_0.position.X() + 0.5f);
-                int abs_w = Abs(w);
-                auto stride_position = (vtx_1.position - vtx_0.position) / abs_w;
-                auto stride_color = (vtx_1.color - vtx_0.color) / abs_w;
-                auto stride_texcoord = (vtx_1.texcoord - vtx_0.texcoord) / abs_w;
-                auto vtx = vtx_0;
-                int total_steps = abs_w + 1;
-                while (total_steps > 0)
-                {
-                    auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
-                    uint32_t x = static_cast<uint32_t>(vtx.position.X() + 0.5f);
-                    uint32_t y = static_cast<uint32_t>(vtx.position.Y() + 0.5f);
-                    uint32_t color = (clr_tex.R() << 16) | (clr_tex.G() << 8) | (clr_tex.B() << 0) | (clr_tex.A() << 24);
-                    render_buffer.SetPixel(x, y, color);
-                    vtx.position += stride_position;
-                    //vtx_left.color += stride_color;
-                    vtx.texcoord += stride_texcoord;
-                    --total_steps;
-                }
-            }
+					int w = int(vtx_1.position.X() + 0.5f) - int(vtx_0.position.X() + 0.5f);
+					int abs_w = Abs(w);
+					auto stride_position = (vtx_1.position - vtx_0.position) / abs_w;
+					auto stride_color = (vtx_1.color - vtx_0.color) / abs_w;
+					auto stride_texcoord = (vtx_1.texcoord - vtx_0.texcoord) / abs_w;
+					auto vtx = vtx_0;
+					int total_steps = abs_w + 1;
+					while (total_steps > 0)
+					{
+						auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
+						uint32_t x = static_cast<uint32_t>(vtx.position.X() + 0.5f);
+						uint32_t y = static_cast<uint32_t>(vtx.position.Y() + 0.5f);
+						float z = vtx.position.Z();
+						uint32_t color = (clr_tex.R() << 16) | (clr_tex.G() << 8) | (clr_tex.B() << 0) | (clr_tex.A() << 24);
+						render_buffer.SetPixel(x, y, color, z);
+						vtx.position += stride_position;
+						//vtx_left.color += stride_color;
+						vtx.texcoord += stride_texcoord;
+						--total_steps;
+					}
+				}
+			}
+
+        }
+        else
+        {
+			Point2i p0, p1, p2;
+			p0.X() = static_cast<int>(vertices[0]->position.X());
+			p0.Y() = static_cast<int>(vertices[0]->position.Y());
+			p1.X() = static_cast<int>(vertices[1]->position.X());
+			p1.Y() = static_cast<int>(vertices[1]->position.Y());
+			p2.X() = static_cast<int>(vertices[2]->position.X());
+			p2.Y() = static_cast<int>(vertices[2]->position.Y());
+			static const ColorF White(255.0f, 255.0f, 255.0f, 255.0f);
+			static const ColorF Black(0.0f, 0.0f, 0.0f, 0.0f);
+			DrawLine2D(p0, p1, White);
+			DrawLine2D(p0, p2, White);
+			DrawLine2D(p1, p2, White);
         }
 
-        Point2i p0, p1, p2;
-        p0.X() = static_cast<int>(vertices[0]->position.X());
-        p0.Y() = static_cast<int>(vertices[0]->position.Y());
-        p1.X() = static_cast<int>(vertices[1]->position.X());
-        p1.Y() = static_cast<int>(vertices[1]->position.Y());
-        p2.X() = static_cast<int>(vertices[2]->position.X());
-        p2.Y() = static_cast<int>(vertices[2]->position.Y());
-        ColorF c(0.0f, 0.0f, 0.0f, 0.0f);
-        DrawLine2D(p0, p1, c);
-        DrawLine2D(p0, p2, c);
-        DrawLine2D(p1, p2, c);
     }
 
     bool Renderer::DrawTriangle3D(const std::array<VertexPtr, 3> & vertices, const Texture2D::Ptr & texture)
@@ -112,7 +120,6 @@ namespace YtcGE
         auto max_y = render_buffer.Height() - 1;
         for (int i = 0; i < 3; ++i)
         {
-             
              auto & vtx = *(vertices[i]);
              auto & v_proj = vertices_proj[i];
              v_proj.position = vtx.position * this->mat_;
@@ -134,7 +141,7 @@ namespace YtcGE
              v_proj.texcoord = vtx.texcoord;
         }
         std::array<Vertex*, 3> vtx_ptr_proj;
-        std::transform(vertices_proj.begin(), vertices_proj.end(), vtx_ptr_proj.begin(), std::addressof<Vertex>);
+        std::transform(vertices_proj.begin(), vertices_proj.end(), vtx_ptr_proj.begin(), [](Vertex& v) { return &v; });
         DrawTriangle(vtx_ptr_proj, texture);
         return true;
     }

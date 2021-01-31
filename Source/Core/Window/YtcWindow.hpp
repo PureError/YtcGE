@@ -27,7 +27,7 @@ namespace YtcGE
         
         struct Attributes
         {
-            String title{ _T("YtcGE")};
+            String title{ _T("YtcGameEngine")};
             int width { 800 };
             int height { 600 };
             uint32_t status { VISIBLE | ACTIVE };

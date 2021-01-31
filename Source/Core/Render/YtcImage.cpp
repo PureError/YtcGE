@@ -11,10 +11,10 @@ namespace YtcGE
     {
         Image::Format fmt;
         ifstream inf(filepath, std::ios::binary);
-        inf.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        //inf.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         if (!inf.is_open())
         {
-            throw Exception(_T("Failed to open file :") + filepath);
+            return nullptr;//throw Exception(_T("Failed to open file :") + filepath);
         }
         Image::Ptr img = std::make_shared<Image>();
         Image & i = *img;

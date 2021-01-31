@@ -78,19 +78,23 @@ void YtcGE::Application::CreateSceneForTest()
     cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
     auto & s = *scene;
     std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
-    tex_coords[0] = { 0.1f, 0.2f };
-    tex_coords[1] = { 0.8f, 0.4f };
-    tex_coords[2] = { 0.9f, 0.4f };
-    tex_coords[3] = { 0.5f, 0.5f };
-    tex_coords[4] = { 0.7f, 0.1f };
-    tex_coords[5] = { 0.3f, 0.6f };
-    tex_coords[6] = { 0.6f, 0.9f };
-    tex_coords[7] = { 0.2f, 0.8f };
+    tex_coords[0] = { 0.0f, 0.0f };
+    tex_coords[1] = { 1.0f, 1.0f };
+	tex_coords[2] = { 1.0f, 1.0f };
+	tex_coords[3] = { 0.0f, 0.0f };
+    tex_coords[4] = { 1.0f, 0.0f };
+    tex_coords[5] = { 0.0f, 0.0f };
+    tex_coords[6] = { 0.0f, 1.0f };
+    tex_coords[7] = { 1.0f, 1.0f };
     auto cube = MakeShared<Cube>(2.0f, 2.0f, 2.0f);
-    cube->Translate(Vec3f{ 0.0f, 0.0f, 10.0f });
+    //cube->Translate(Vec3f{ 0.0f, 0.0f, 2.0f });
     cube->TextureCoord(tex_coords);
-    auto img = Image::FromFile("./../../Resource/Images/hahah.bmp");
-    cube->Texture(MakeShared<Texture2D>(img));
+    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+    if (img)
+    {
+		auto texture = MakeShared<Texture2D>(img);
+		cube->Texture(texture);
+    }
     //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
     s.AddNode(cube);
     s.AddCamera(_T("TestCamera"), cam, true);

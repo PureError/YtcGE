@@ -8,10 +8,12 @@ namespace YtcGE
     class RenderableBuffer
     {
     public:
+        static constexpr float ZMin = -1.0f;
         RenderableBuffer(void * buffer, uint32_t w, uint32_t h) noexcept
-            : buffer_(static_cast<Pixel*>(buffer)),
+            : pixel_buffer_(static_cast<Pixel*>(buffer)),
               width_(w), height_(h), size_(w * h)
         {
+            z_buffer_ = std::vector<float>(size_, ZMin);
         }
 
         ~RenderableBuffer() noexcept
@@ -23,19 +25,30 @@ namespace YtcGE
             return sizeof(Pixel);
         }
 
-        void SetPixel(uint32_t x, uint32_t y, Pixel value) noexcept
+        void SetPixel(uint32_t x, uint32_t y, Pixel value, float z = ZMin) noexcept
         {
-            buffer_[y * width_ + x] = value;
+            int pos = y * width_ + x;
+            if (z >= z_buffer_[pos])
+            {
+                z_buffer_[pos] = z;
+				pixel_buffer_[pos] = value;
+            }
         }
 
         void FillWith(Pixel pixel) noexcept
         {
-            std::fill(buffer_, buffer_ + Size(), pixel);
+            std::fill(pixel_buffer_, pixel_buffer_ + Size(), pixel);
+            std::fill(z_buffer_.begin(), z_buffer_.end(), ZMin);
         }
 
-        constexpr uint8_t* Buffer() const noexcept
+        const std::vector<float>& ZBuffer() const noexcept
         {
-            return reinterpret_cast<uint8_t*>(buffer_);
+            return z_buffer_;
+        }
+
+        constexpr uint8_t* PixelBuffer() const noexcept
+        {
+            return reinterpret_cast<uint8_t*>(pixel_buffer_);
         }
 
         constexpr uint32_t SizeInBytes() const noexcept
@@ -59,7 +72,8 @@ namespace YtcGE
         }
 
     private:
-        Pixel * buffer_;
+        Pixel * pixel_buffer_;
+        std::vector<float> z_buffer_;
         uint32_t size_;
         uint32_t width_;
         uint32_t height_;

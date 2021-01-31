@@ -32,7 +32,7 @@ namespace YtcGE
         {
             position_ += v;
             auto& row_3 = mat_m2w[3];
-            row_3 = { -position_.X(), -position_.Y(), -position_.Z() };
+            row_3 = position_;
         }
 
         void Rotate(const Vec3f& r, float theta)
