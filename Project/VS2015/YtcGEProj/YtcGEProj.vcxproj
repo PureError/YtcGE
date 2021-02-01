@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp" />
-    <ClCompile Include="..\..\..\Source\Core\Entity\YtcSceneManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp" />
@@ -43,7 +43,6 @@
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp" />
-    <ClInclude Include="..\..\..\Source\Core\Entity\YtcSceneManager.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
@@ -52,6 +51,7 @@
     <ClInclude Include="..\..\..\Source\Core\Math\YtcPoint.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcSceneManager.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp" />

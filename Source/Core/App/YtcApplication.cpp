@@ -1,7 +1,7 @@
 #include "YtcApplication.hpp"
 #include "../Utility/Localization.hpp"
 #include "../Render/YtcRenderer.hpp"
-#include "../Entity/YtcSceneManager.hpp"
+#include "../Module/YtcSceneManager.hpp"
 #include "../Entity/YtcCube.hpp"
 #include <thread>
 #include <random>
@@ -50,7 +50,7 @@ void YtcGE::Application::Run()
         {
             win_->Update();
             SceneManager::Instance().Update();
-            std::this_thread::sleep_for(chrono::microseconds(300));
+            std::this_thread::sleep_for(chrono::milliseconds(1));
         }
     }
 
@@ -89,12 +89,17 @@ void YtcGE::Application::CreateSceneForTest()
     auto cube = MakeShared<Cube>(2.0f, 2.0f, 2.0f);
     //cube->Translate(Vec3f{ 0.0f, 0.0f, 2.0f });
     cube->TextureCoord(tex_coords);
-    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
-    if (img)
+    try
     {
-		auto texture = MakeShared<Texture2D>(img);
-		cube->Texture(texture);
+        auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+        auto texture = MakeShared<Texture2D>(img);
+        cube->Texture(texture);
     }
+    catch (...)
+    {
+
+    }
+
     //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
     s.AddNode(cube);
     s.AddCamera(_T("TestCamera"), cam, true);
