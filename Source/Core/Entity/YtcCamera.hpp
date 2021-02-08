@@ -54,9 +54,9 @@ namespace YtcGE
             return proj_;
         }
 
-        const Mat44f& VP() const noexcept
+        Mat44f VP() const noexcept
         {
-            return view_proj_;
+            return V() * P();
         }
 
         void SetPosition(const Point3f& position) noexcept
@@ -104,7 +104,6 @@ namespace YtcGE
         Point3f target_ = { 0.0f, 0.0f, 0.0f };
         mutable Mat44f view_;
         mutable Mat44f proj_;
-        mutable Mat44f view_proj_;
         mutable bool view_dirty_ = true;
     };
 

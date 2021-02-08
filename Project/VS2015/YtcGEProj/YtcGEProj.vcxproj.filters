@@ -50,7 +50,13 @@
     <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp">
       <Filter>Source\Core\Render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcInputManager.cpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp">
       <Filter>Source\Core\Module</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +99,9 @@
     </Filter>
     <Filter Include="Source\Core\Module">
       <UniqueIdentifier>{37e53e78-cc11-46ce-9d8b-345f050de83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Input">
+      <UniqueIdentifier>{4b67d89b-0fd0-43c9-8280-4ad8373e84cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +189,6 @@
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp">
       <Filter>Source\Core\Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp">
-      <Filter>Source\Core\Entity</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp">
       <Filter>Source\Core\Utility</Filter>
     </ClInclude>
@@ -202,6 +208,30 @@
       <Filter>Source\Core\Render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Module\YtcSceneManager.hpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCamera.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcInputManager.hpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcKeyboard.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcMouse.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInput.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInputDevice.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcLambda.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcGameLogicManger.hpp">
       <Filter>Source\Core\Module</Filter>
     </ClInclude>
   </ItemGroup>

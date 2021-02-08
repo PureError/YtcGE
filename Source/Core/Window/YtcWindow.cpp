@@ -125,6 +125,10 @@ namespace YtcGE
                 break;
             case WM_DESTROY:
                 break;
+            case WM_KEYDOWN:
+            case WM_KEYUP:
+                eventDispatcher_->Dispatch(uMsg, wParam);
+                break;
             default:
                 break;
         }

@@ -2,6 +2,7 @@
 #include "../Utility/Localization.hpp"
 #include "../Render/YtcRenderer.hpp"
 #include "../Module/YtcSceneManager.hpp"
+#include "../Module/YtcGameLogicManger.hpp"
 #include "../Entity/YtcCube.hpp"
 #include <thread>
 #include <random>
@@ -49,6 +50,7 @@ void YtcGE::Application::Run()
         else
         {
             win_->Update();
+            GameLogicManager::Instance().Update();
             SceneManager::Instance().Update();
             std::this_thread::sleep_for(chrono::milliseconds(1));
         }
@@ -78,16 +80,16 @@ void YtcGE::Application::CreateSceneForTest()
     cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
     auto & s = *scene;
     std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
-    tex_coords[0] = { 0.0f, 0.0f };
-    tex_coords[1] = { 1.0f, 1.0f };
-	tex_coords[2] = { 1.0f, 1.0f };
-	tex_coords[3] = { 0.0f, 0.0f };
-    tex_coords[4] = { 1.0f, 0.0f };
-    tex_coords[5] = { 0.0f, 0.0f };
-    tex_coords[6] = { 0.0f, 1.0f };
-    tex_coords[7] = { 1.0f, 1.0f };
+    tex_coords[Cube::FAR_TOP_RIGHT] = { 1.0f, 0.0f };
+    tex_coords[Cube::FAR_TOP_LEFT] = { 0.0f, 0.0f };
+	tex_coords[Cube::FAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
+	tex_coords[Cube::FAR_BOTTOM_RIGHT] = { 1.0f, 1.0f };
+    tex_coords[Cube::NEAR_TOP_RIGHT] = { 1.0f, 0.0f };
+    tex_coords[Cube::NEAR_TOP_LEFT] = { 0.0f, 0.0f };
+    tex_coords[Cube::NEAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
+    tex_coords[Cube::NEAR_BOTTOM_RIGHT] = { 1.0f, 1.0f };
     auto cube = MakeShared<Cube>(2.0f, 2.0f, 2.0f);
-    //cube->Translate(Vec3f{ 0.0f, 0.0f, 2.0f });
+    cube->Name() = _T("YtcCube");
     cube->TextureCoord(tex_coords);
     try
     {

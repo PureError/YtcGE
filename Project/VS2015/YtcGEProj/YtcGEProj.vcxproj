@@ -24,6 +24,8 @@
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcInputManager.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp" />
@@ -40,10 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCamera.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInput.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInputDevice.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcKeyboard.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcMouse.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcMath.hpp" />
@@ -51,11 +58,12 @@
     <ClInclude Include="..\..\..\Source\Core\Math\YtcPoint.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcGameLogicManger.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcInputManager.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Module\YtcSceneManager.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp" />
-    <ClInclude Include="..\..\..\Source\Core\Render\YtcCamera.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Render\YtcModel.hpp" />
@@ -67,6 +75,7 @@
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\Localization.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcLambda.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcUncopyable.hpp" />

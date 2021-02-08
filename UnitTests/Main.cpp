@@ -11,11 +11,16 @@
 #include <sstream>
 #include <iostream>
 #include <cassert>
+
+namespace YtcGE
+{
+    UniquePtr<YtcGE::Application> App;
+}
+
 using namespace YtcGE;
 using namespace std;
 
 
-UniquePtr<Application> App;
 int main(int argc, const Char* argv[])
 {
     std::vector<String> cmdArgs(argc);

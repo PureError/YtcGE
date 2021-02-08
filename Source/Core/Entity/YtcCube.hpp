@@ -40,6 +40,7 @@ namespace YtcGE
             }
         }
 
+        virtual std::shared_ptr<Node> Clone() override;
     private:
         Vec3f lwh_;
     };

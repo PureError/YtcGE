@@ -53,7 +53,7 @@ namespace YtcGE
     template<typename T>
     constexpr inline T Clamp(const T& val, const T& lowerbound, const T& upperbound) noexcept
     {
-        return (std::max)(lowerbound, (std::min)(val, upperbound));
+        return Max(lowerbound, Min(val, upperbound));
     }
 
     template<typename T>

@@ -41,4 +41,9 @@ namespace YtcGE
 
     }
 
+    std::shared_ptr<YtcGE::Node> Cube::Clone()
+    {
+        return std::static_pointer_cast<Node>(std::make_shared<Cube>(lwh_.X(), lwh_.Y(), lwh_.Z()));
+    }
+
 }

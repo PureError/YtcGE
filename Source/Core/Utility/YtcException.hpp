@@ -41,6 +41,9 @@ namespace YtcGE
         const String message_;
     };
 
+    class NoImplementation : public Exception {};
+
 }
+
 
 #endif

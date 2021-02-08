@@ -11,7 +11,6 @@ namespace YtcGE
         far_plane_ = far_plane;
 
         proj_ = PerspectiveProjectionLH(fov, aspect, near_plane, far_plane);
-        view_proj_ = V() * proj_;
     }
 
 }

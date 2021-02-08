@@ -30,7 +30,7 @@ namespace YtcGE
             return nodes_;
         }
 
-        SharedPtr<Node> GetNodeByName(const String& name) noexcept
+        SharedPtr<Node> NodeByName(const String& name) noexcept
         {
             auto iter = std::find_if(nodes_.begin(), nodes_.end(), [&](const SharedPtr<Node> & node)
             {
@@ -57,7 +57,7 @@ namespace YtcGE
         bool AddCamera(const String& key, const CameraPtr& cam, bool use = false);
         bool AddNode(const SharedPtr<Node> & node)
         {
-            if (!GetNodeByName(node->Name()))
+            if (!NodeByName(node->Name()))
             {
                 nodes_.push_back(node);
                 return true;

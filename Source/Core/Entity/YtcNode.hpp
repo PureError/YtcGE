@@ -65,7 +65,7 @@ namespace YtcGE
             return children_;
         }
 
-        std::shared_ptr<Node> Clone()
+        virtual std::shared_ptr<Node> Clone()
         {
             return nullptr;
         }

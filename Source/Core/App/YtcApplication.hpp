@@ -3,6 +3,7 @@
 
 #include "../StringUtils/YtcString.hpp"
 #include "../Window/YtcWindow.hpp"
+#include "../Utility/Localization.hpp"
 #include <vector>
 
 namespace YtcGE
@@ -41,7 +42,7 @@ namespace YtcGE
         WindowPtr win_;
         RuntimeInfoPtr rtInfo_;
     };
-
+    extern UniquePtr<YtcGE::Application> App;
 }
 
 #endif

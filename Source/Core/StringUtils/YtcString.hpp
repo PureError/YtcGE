@@ -30,8 +30,8 @@ namespace YtcGE
         
         static const MyType & Emtpy() noexcept
         {
-            static MyType emtpy;
-            return emtpy;
+            static MyType empty;
+            return empty;
         }
 
         String_T() noexcept = default;
