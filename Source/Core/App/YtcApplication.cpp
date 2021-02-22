@@ -69,21 +69,14 @@ YtcGE::Application::~Application()
 {
 }
 
-void YtcGE::Application::CreateSceneForTest()
+
+static SharedPtr<Node> CubeForTest()
 {
-    String scene_name = _T("TestScene");
-    auto scene = MakeShared<Scene>(scene_name);
-    CameraPtr cam = MakeShared<Camera>();
-    auto w = win_->RenderBuffer().Width();
-    auto h = win_->RenderBuffer().Height();
-    auto aspect = w * 1.0f / h;
-    cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
-    auto & s = *scene;
     std::array<Vec2f, Cube::VERTEX_COUNT> tex_coords;
     tex_coords[Cube::FAR_TOP_RIGHT] = { 1.0f, 0.0f };
     tex_coords[Cube::FAR_TOP_LEFT] = { 0.0f, 0.0f };
-	tex_coords[Cube::FAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
-	tex_coords[Cube::FAR_BOTTOM_RIGHT] = { 1.0f, 1.0f };
+    tex_coords[Cube::FAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
+    tex_coords[Cube::FAR_BOTTOM_RIGHT] = { 1.0f, 1.0f };
     tex_coords[Cube::NEAR_TOP_RIGHT] = { 1.0f, 0.0f };
     tex_coords[Cube::NEAR_TOP_LEFT] = { 0.0f, 0.0f };
     tex_coords[Cube::NEAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
@@ -99,11 +92,36 @@ void YtcGE::Application::CreateSceneForTest()
     }
     catch (...)
     {
-
     }
 
     //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
-    s.AddNode(cube);
+    return cube;
+}
+
+static SharedPtr<Node> DiabloForTest()
+{
+    auto node = MakeShared<Node>();
+    node->Name() = _T("Diablo");
+    ModelDataMapPtr model_data = MakeShared<ModelDataMap>(_T("./../../Resource/3DModels/diablo.obj"));
+    node->ModelInUse() = MakeShared<Model>(model_data);
+    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+    auto texture = MakeShared<Texture2D>(img);
+    node->Texture(texture);
+    return node;
+}
+
+void YtcGE::Application::CreateSceneForTest()
+{
+    String scene_name = _T("TestScene");
+    auto scene = MakeShared<Scene>(scene_name);
+    CameraPtr cam = MakeShared<Camera>();
+    auto w = win_->RenderBuffer().Width();
+    auto h = win_->RenderBuffer().Height();
+    auto aspect = w * 1.0f / h;
+    cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
+    auto & s = *scene;
+    //s.AddNode(CubeForTest());
+    s.AddNode(DiabloForTest());
     s.AddCamera(_T("TestCamera"), cam, true);
     SceneManager::Instance().AddScene(scene);
     SceneManager::Instance().ReplaceScence(scene_name);

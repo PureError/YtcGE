@@ -46,10 +46,13 @@ namespace YtcGE
             for (auto & n : nodes)
             {
                 //n->Rotate(Normalize(Vec3f{ 0.0f, 1.0f, 0.0f }), DegreesToRadians(10.0f));
-                auto & model_data = n->ModelData();
-                auto & mvp = n->Model2Word() * mat_vp;
-                Renderer::Get().SetTransformMatrix(mvp);
-                Renderer::Get().DrawModel(model_data);
+                auto & model = n->ModelInUse();
+                if (model)
+                {
+                    auto & mvp = n->Model2Word() * mat_vp;
+                    Renderer::Get().SetTransformMatrix(mvp);
+                    Renderer::Get().DrawModel(*model);
+                }
             }
 
         }

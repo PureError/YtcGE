@@ -10,7 +10,9 @@ namespace YtcGE
         auto scene = SceneManager::Instance().CurrentScene();
         if (scene)
         {
-            auto node = scene->NodeByName(_T("YtcCube"));
+            //auto node = scene->NodeByName(_T("YtcCube"));
+            auto node = scene->NodeByName(_T("Diablo"));
+            YTC_RT_ASSERT(node);
             auto keyboard = InputManager::Instance().Keyboard();
 
             if (keyboard->IsKeyDown(Keyboard::Key::W))

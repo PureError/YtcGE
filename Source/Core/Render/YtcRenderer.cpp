@@ -44,7 +44,7 @@ namespace YtcGE
 
 
 
-    void Renderer::DrawTriangle(const std::array<Vertex*, 3> & vertices, const Texture2D::Ptr & texture)
+    void Renderer::DrawTriangle(const std::array<VertexAttrib*, 3> & vertices, const Texture2D::Ptr & texture)
     {
         std::array<YtcGE::Trapzoid, 2> traps;
         int count_traps = SplitTriangle(vertices, traps);
@@ -112,9 +112,9 @@ namespace YtcGE
 
     }
 
-    bool Renderer::DrawTriangle3D(const std::array<VertexPtr, 3> & vertices, const Texture2D::Ptr & texture)
+    bool Renderer::DrawTriangle3D(const std::array<VertexAttribPtr, 3> & vertices, const Texture2D::Ptr & texture)
     {
-        std::array<Vertex, 3> vertices_proj;
+        std::array<VertexAttrib, 3> vertices_proj;
         auto& render_buffer = App->MainWindow()->RenderBuffer();
         auto max_x = render_buffer.Width() - 1;
         auto max_y = render_buffer.Height() - 1;
@@ -140,15 +140,15 @@ namespace YtcGE
              v_proj.color = vtx.color;
              v_proj.texcoord = vtx.texcoord;
         }
-        std::array<Vertex*, 3> vtx_ptr_proj;
-        std::transform(vertices_proj.begin(), vertices_proj.end(), vtx_ptr_proj.begin(), [](Vertex& v) { return &v; });
+        std::array<VertexAttrib*, 3> vtx_ptr_proj;
+        std::transform(vertices_proj.begin(), vertices_proj.end(), vtx_ptr_proj.begin(), [](VertexAttrib& v) { return &v; });
         DrawTriangle(vtx_ptr_proj, texture);
         return true;
     }
 
     void Renderer::DrawModel(const Model& model)
     {
-        std::array<VertexPtr, 3> triangle;
+        std::array<VertexAttribPtr, 3> triangle;
         auto& indices = model.indices;
         auto& vertices = model.vertices;
         auto& texture = model.texture;
@@ -162,9 +162,9 @@ namespace YtcGE
         }
     }
 
-    int Renderer::SplitTriangle(std::array<Vertex*, 3> t, std::array<YtcGE::Trapzoid, 2> & trapzoids) noexcept
+    int Renderer::SplitTriangle(std::array<VertexAttrib*, 3> t, std::array<YtcGE::Trapzoid, 2> & trapzoids) noexcept
     {
-        std::sort(t.begin(), t.end(), [](const Vertex* lhs, const Vertex* rhs)
+        std::sort(t.begin(), t.end(), [](const VertexAttrib* lhs, const VertexAttrib* rhs)
         {
             return lhs->position.Y() < rhs->position.Y();
         });

@@ -37,12 +37,18 @@ namespace YtcGE
 
         void Rotate(const Vec3f& r, float theta)
         {
-            model_.Rotate(r, theta);
+            if (model_)
+            {
+                model_->Rotate(r, theta);
+            }
         }
 
         void Scale(const Vec3f& s)
         {
-            model_.Scale(s);
+            if (model_)
+            {
+                model_->Scale(s);
+            }
         }
 
         std::weak_ptr<Node> Parent() const noexcept
@@ -75,7 +81,12 @@ namespace YtcGE
             return position_;
         }
 
-        const Model& ModelData() const noexcept
+        Model::Ptr & ModelInUse() noexcept
+        {
+            return model_;
+        }
+
+        const Model::Ptr& ModelInUse() const noexcept
         {
             return model_;
         }
@@ -85,9 +96,14 @@ namespace YtcGE
             return mat_m2w;
         }
 
-        void Texture(const Texture2D::Ptr & texture) noexcept
+        bool Texture(const Texture2D::Ptr & texture) noexcept
         {
-            this->model_.texture = texture;
+            if (this->model_)
+            {
+                this->model_->texture = texture;
+                return true;
+            }
+            return false;
         }
 
         void AddChild(const std::shared_ptr<Node> & child);
@@ -100,7 +116,7 @@ namespace YtcGE
         std::vector<std::shared_ptr<Node>> children_;
         Vec3f position_ = { 0.0f, 0.0f, 0.0f };
         Mat44f mat_m2w = SquareMatrixHelper44f::Identity();
-        Model model_;
+        Model::Ptr model_;
     };
 }
 

@@ -42,7 +42,6 @@ namespace YtcGE
     };
 
     class NoImplementation : public Exception {};
-
 }
 
 

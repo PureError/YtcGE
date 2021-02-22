@@ -8,8 +8,7 @@
 namespace YtcGE
 {
 
-
-    struct Vertex
+    struct VertexAttrib
     {
         Point4f position;
         ColorF color;
@@ -23,7 +22,7 @@ namespace YtcGE
 
 
     template<>
-    inline Vertex Lerp<Vertex>(const Vertex & v1, const Vertex & v2, float s) noexcept
+    inline VertexAttrib Lerp<VertexAttrib>(const VertexAttrib & v1, const VertexAttrib & v2, float s) noexcept
     {
         return
         {
@@ -32,7 +31,7 @@ namespace YtcGE
             Lerp(v1.texcoord, v2.texcoord, s),
         };
     }
-    using VertexPtr = std::shared_ptr<Vertex>;
+    using VertexAttribPtr = std::shared_ptr<VertexAttrib>;
 }
 
 

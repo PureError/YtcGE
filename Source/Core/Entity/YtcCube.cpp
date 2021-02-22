@@ -1,5 +1,4 @@
 #include "YtcCube.hpp"
-#include <iostream>
 namespace YtcGE
 {
 
@@ -7,11 +6,12 @@ namespace YtcGE
         : lwh_{ length, width, height }
     {
         Vec3f lwh_half = lwh_ / 2;
-        auto& vertices = model_.vertices;
+        this->model_ = MakeShared<Model>();
+        auto& vertices = model_->vertices;
         vertices.resize(VERTEX_COUNT);
-        std::for_each(vertices.begin(), vertices.end(), [](VertexPtr& ptr) 
+        std::for_each(vertices.begin(), vertices.end(), [](VertexAttribPtr& ptr) 
         {
-            ptr = MakeShared<Vertex>();
+            ptr = MakeShared<VertexAttrib>();
         });
         vertices[FAR_TOP_RIGHT]->position = { lwh_half.X(), lwh_half.Y(), lwh_half.Z(), 1.0f };
         vertices[FAR_TOP_LEFT]->position = { -lwh_half.X(), lwh_half.Y(), lwh_half.Z(), 1.0f };
@@ -22,8 +22,7 @@ namespace YtcGE
         vertices[NEAR_BOTTOM_LEFT]->position = { -lwh_half.X(), -lwh_half.Y(), -lwh_half.Z(), 1.0f };
         vertices[NEAR_BOTTOM_RIGHT]->position = { lwh_half.X(), -lwh_half.Y(), -lwh_half.Z(), 1.0f };
 
-        model_.Dump(std::cout);
-        model_.indices =
+        model_->indices =
         {
             { 0, 1, 2 }, //far
             { 0, 2, 3 },

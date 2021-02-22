@@ -2,12 +2,10 @@
 //#include "TestString.hpp"
 //#include "TestMatrix.hpp"
 //#include "TestSingleton.hpp"
-#include <core/Utility/YtcEventDispatcher.hpp>
+#include "TestModel.hpp"
 
 
 #include <Core/App/YtcApplication.hpp>
-#include <Core/Render/YtcVertex.hpp>
-#include <Core/Render/YtcImage.hpp>
 #include <sstream>
 #include <iostream>
 #include <cassert>

@@ -27,7 +27,7 @@ namespace YtcGE
 
         void TextureCoord(VertexLocation vl, float u, float v) noexcept
         {
-            auto & texcoord = model_.vertices[vl]->texcoord;
+            auto & texcoord = model_->vertices[vl]->texcoord;
             texcoord.U() = u;
             texcoord.V() = v;
         }

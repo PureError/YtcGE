@@ -7,9 +7,12 @@
 #include <cassert>
 #define YTC_RT_ASSERT assert
 #define YTC_STATIC_ASSERT static_assert
-
 namespace YtcGE
 {
+    using Byte = uint8_t;
+    using Word = uint16_t;
+    using DWord = uint32_t;
+
     template<typename T>
     using SharedPtr = std::shared_ptr<T>;
     template<typename T>

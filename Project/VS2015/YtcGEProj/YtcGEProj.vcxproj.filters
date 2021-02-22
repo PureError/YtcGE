@@ -59,6 +59,9 @@
     <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp">
       <Filter>Source\Core\Module</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestModel.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UnitTests">
@@ -233,6 +236,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Source\Core\Module\YtcGameLogicManger.hpp">
       <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventHandler.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileStream.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestModel.hpp">
+      <Filter>UnitTests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

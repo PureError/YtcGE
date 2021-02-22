@@ -219,14 +219,12 @@ namespace YtcGE
 
         T& W() noexcept
         {
-            static_assert(N >= 4, "Must be 4D at least!");
-            return data_[3];
+            return data_[N - 1];
         }
 
         constexpr const T& W() const noexcept
         {
-            static_assert(N >= 4, "Must be 4D at least!");
-            return data_[3];
+            return data_[N - 1];
         }
 
         T & U() noexcept
@@ -501,6 +499,14 @@ namespace YtcGE
             lhs[2] * rhs[0] - lhs[0] * rhs[2],
             lhs[0] * rhs[1] - lhs[1] * rhs[0],
         };
+    }
+
+    template<typename T, int N>
+    inline Vector<T, N + 1> IncDimension(const Vector<T, N> & old, T val = T(1)) noexcept
+    {
+        Vector<T, N + 1> v(old);
+        v[N] = val;
+        return v;
     }
 
     using Vec2i = Vector<int, 2>;
