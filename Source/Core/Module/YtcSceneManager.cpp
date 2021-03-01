@@ -33,7 +33,7 @@ namespace YtcGE
     void SceneManager::Update()
     {
         auto keyboard = InputManager::Instance().Keyboard();
-        Renderer::Get().BackGround(ColorF(0.0f, 0.0f, 0.0f, 0.0f));
+        Renderer::Get().BackGround(ColorF(220.0f, 220.0f, 225.0f, 255.0f));
         auto scene_ptr = CurrentScene();
         if (scene_ptr)
         {

@@ -87,11 +87,11 @@ namespace YtcGE
 
         constexpr Color() noexcept = default;
 
-        constexpr Color(T r, T g, T b, T a) noexcept : vec({ r, g, b, a })
+        Color(T r, T g, T b, T a) noexcept : vec({ r, g, b, a })
         {
         }
 
-        constexpr Color(std::initializer_list<T> inilist) noexcept : vec(std::move(inilist))
+        Color(std::initializer_list<T> inilist) noexcept : vec(std::move(inilist))
         {
 
         }
@@ -100,7 +100,7 @@ namespace YtcGE
         {
         }
 
-        constexpr Color(Color_T && other) : vec(std::move(other.vec))
+        Color(Color_T && other) : vec(std::move(other.vec))
         {
 
         }
@@ -109,7 +109,7 @@ namespace YtcGE
         {
         }
 
-        constexpr Color(Vector_T && v) : vec(std::move(v))
+        Color(Vector_T && v) : vec(std::move(v))
         {
 
         }
@@ -259,6 +259,13 @@ namespace YtcGE
         return dst;
     }
 
+    extern const ColorF White;
+    extern const ColorF Black;
+    extern const ColorF Green;
+    extern const ColorF Red;
+    extern const ColorF Blue;
+    extern const ColorF Purple;
+    extern const ColorF Yellow;
 }
 
 #endif

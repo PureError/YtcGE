@@ -27,12 +27,14 @@
     <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Module\YtcInputManager.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcColor.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Utility\YtcFileSystem.cpp" />
     <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp" />
     <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
     <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp" />
@@ -78,6 +80,7 @@
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventHandler.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileStream.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileSystem.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcLambda.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp" />
     <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp" />

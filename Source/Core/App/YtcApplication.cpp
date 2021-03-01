@@ -104,7 +104,7 @@ static SharedPtr<Node> DiabloForTest()
     node->Name() = _T("Diablo");
     ModelDataMapPtr model_data = MakeShared<ModelDataMap>(_T("./../../Resource/3DModels/diablo.obj"));
     node->ModelInUse() = MakeShared<Model>(model_data);
-    auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
+    auto img = Image::FromFile("./../../Resource/Images/diablo3_pose_diffuse.bmp");
     auto texture = MakeShared<Texture2D>(img);
     node->Texture(texture);
     return node;

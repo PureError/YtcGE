@@ -1,4 +1,3 @@
-#pragma once
 #ifndef FUNDATION_HPP
 #define FUNDATION_HPP
 

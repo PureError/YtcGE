@@ -1,5 +1,5 @@
 //#include "TestVector.hpp"
-//#include "TestString.hpp"
+#include "TestString.hpp"
 //#include "TestMatrix.hpp"
 //#include "TestSingleton.hpp"
 #include "TestModel.hpp"
@@ -25,5 +25,6 @@ int main(int argc, const Char* argv[])
     std::copy(argv, argv + argc, cmdArgs.begin());
     App = Application::Create(cmdArgs);
     App->Run();
+    //UnitTest::DoTestString();
     return 0;
 }

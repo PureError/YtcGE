@@ -3,7 +3,11 @@
 #define TEST_STRING_HPP
 #include <Core/StringUtils/YtcString.hpp>
 
-void DoTestString();
+
+namespace UnitTest
+{
+    void DoTestString();
+}
 
 
 #endif

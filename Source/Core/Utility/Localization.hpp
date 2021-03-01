@@ -1,7 +1,6 @@
 #ifndef _LOCALIZATION_HPP
 #define _LOCALIZATION_HPP
 
-#include "../StringUtils/YtcString.hpp"
 #include "YtcLambda.hpp"
 #include <memory>
 #include <cassert>

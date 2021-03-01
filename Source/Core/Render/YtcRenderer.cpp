@@ -103,11 +103,9 @@ namespace YtcGE
 			p1.Y() = static_cast<int>(vertices[1]->position.Y());
 			p2.X() = static_cast<int>(vertices[2]->position.X());
 			p2.Y() = static_cast<int>(vertices[2]->position.Y());
-			static const ColorF White(255.0f, 255.0f, 255.0f, 255.0f);
-			static const ColorF Black(0.0f, 0.0f, 0.0f, 0.0f);
-			DrawLine2D(p0, p1, White);
-			DrawLine2D(p0, p2, White);
-			DrawLine2D(p1, p2, White);
+			DrawLine2D(p0, p1, Green);
+			DrawLine2D(p0, p2, Green);
+			DrawLine2D(p1, p2, Green);
         }
 
     }

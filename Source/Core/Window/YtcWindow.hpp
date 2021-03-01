@@ -44,32 +44,32 @@ namespace YtcGE
         BasicWindow(const Attributes& na = Attributes());
         virtual ~BasicWindow();
 
-        int Height() const
+        int Height() const noexcept
         {
             return attr_.height;
         }
 
-        int Width() const
+        int Width() const noexcept
         {
             return attr_.width;
         }
 
-        const String & Title() const
+        const String & Title() const noexcept
         {
             return attr_.title;
         }
 
-        bool Visible() const
+        bool Visible() const noexcept
         {
             return (attr_.status & VISIBLE) == VISIBLE;
         }
 
-        bool VSync() const
+        bool VSync() const noexcept
         {
             return (attr_.status & VSYNC) == VSYNC ;
         }
 
-        bool Active() const
+        bool Active() const noexcept
         {
             return (attr_.status & ACTIVE) == ACTIVE;
         }
@@ -94,7 +94,7 @@ namespace YtcGE
         }
 #ifdef YTC_OS_WINDOWS
     public:
-        HWND Handle() const
+        HWND Handle() const noexcept
         {
             return wnd_;
         }
