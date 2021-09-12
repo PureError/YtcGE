@@ -395,21 +395,6 @@ namespace YtcGE
         return *this;
     }
 
-    //template<typename T, int N>
-    //template<typename C>
-    //inline Vector<T, N>& Vector<T, N>::operator*=(C scale) noexcept
-    //{
-    //    Mult(*this, scale, *this);
-    //    return *this;
-    //}
-
-    //template<typename T, int N>
-    //template<typename C>
-    //inline Vector<T, N>& Vector<T, N>::operator/=(C divisor) noexcept
-    //{
-    //    Div(*this, divisor, *this);
-    //    return *this;
-    //}
     template<typename T, int N, typename C>
     inline Vector<T, N> & operator*=(Vector<T, N>& v, C scale) noexcept
     {

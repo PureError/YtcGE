@@ -3,7 +3,7 @@
 
 #include "../Utility/YtcSingleton.hpp"
 #include "../Input/YtcInput.hpp"
-
+#include "../Utility/YtcEventDispatcher.hpp"
 namespace YtcGE
 {
     class InputManager : public Singleton<InputManager>

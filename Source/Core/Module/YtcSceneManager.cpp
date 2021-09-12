@@ -20,12 +20,12 @@ namespace YtcGE
         }
     }
 
-    void SceneManager::ReplaceScence(const String& name)
+    void SceneManager::ReplaceScene(const String& name)
     {
-        auto s = SceneByName(name);
-        if (s)
+        auto iter = std::find_if(scenes_.begin(), scenes_.end(), [&](const ScenePtr& s) { return s->Name() == name; });
+        if (iter != scenes_.end())
         {
-            current_scene_ = s;
+            current_scene_ = (iter - scenes_.begin());
         }
     }
 
@@ -33,7 +33,7 @@ namespace YtcGE
     void SceneManager::Update()
     {
         auto keyboard = InputManager::Instance().Keyboard();
-        Renderer::Get().BackGround(ColorF(220.0f, 220.0f, 225.0f, 255.0f));
+        Renderer::Get().BackGround(ColorF());
         auto scene_ptr = CurrentScene();
         if (scene_ptr)
         {

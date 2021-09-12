@@ -11,101 +11,77 @@ namespace YtcGE
 {
     YtcGE::Renderer::Renderer()
     {
-
     }
-
 
     void Renderer::BackGround(const ColorF & color) noexcept
     {
         App->MainWindow()->RenderBuffer().FillWith(color.ToUint32());
     }
 
-    void Renderer::DrawLine(const Point3f & from, const Point3f & to, const ColorF & color) noexcept
+    void Renderer::DrawPoint(const Point2u point, const Color32b& color, float z) noexcept
     {
-
+        auto& render_buffer = App->MainWindow()->RenderBuffer();
+        uint32_t c = (color.R() << 16) | (color.G() << 8) | (color.B() << 0) | (color.A() << 24);
+        render_buffer.SetPixel(point.X(), point.Y(), c, z);
     }
 
-    void Renderer::DrawPoint(const Point3f & point, const ColorF & color) noexcept
-    {
-
-    }
-
-    void Renderer::DrawPoint(const Point2i & coordOnScreen, const ColorF & color) noexcept
-    {
-        auto rgba = color.RGBA8888();
-#ifdef YTC_OS_WINDOWS
-        COLORREF rgb = RGB(std::get<0>(rgba), std::get<1>(rgba), std::get<2>(rgba));
-        HWND hwnd = App->MainWindow()->Handle();
-        HDC hdc = ::GetDC(hwnd);
-        ::SetPixel(hdc, coordOnScreen.X(), coordOnScreen.Y(), rgb);
-       ::ReleaseDC(hwnd, hdc);
-#endif
-    }
-
-
-
-    void Renderer::DrawTriangle(const std::array<VertexAttrib*, 3> & vertices, const Texture2D::Ptr & texture)
+    void Renderer::DrawTriangle(const std::array<VertexAttrib*, 3>& vertices, const Texture2D::Ptr& texture)
     {
         std::array<YtcGE::Trapzoid, 2> traps;
         int count_traps = SplitTriangle(vertices, traps);
         auto & render_buffer = App->MainWindow()->RenderBuffer();
         if (texture)
         {
-			for (int i = 0; i < count_traps; ++i)
-			{
-				auto& trap = traps[i];
-				auto& e0_v0 = *trap.edges[0][0];
-				auto& e0_v1 = *trap.edges[0][1];
-				auto& e1_v0 = *trap.edges[1][0];
-				auto& e1_v1 = *trap.edges[1][1];
+			      for (int i = 0; i < count_traps; ++i)
+			      {
+				        auto& trap = traps[i];
+				        auto& e0_v0 = *trap.edges[0][0];
+				        auto& e0_v1 = *trap.edges[0][1];
+				        auto& e1_v0 = *trap.edges[1][0];
+				        auto& e1_v1 = *trap.edges[1][1];
 
-				float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
-				float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
-				int top = static_cast<int>(trap.top + 0.5f);
-				int bottom = static_cast<int>(trap.bottom + 0.5f);
-				for (int pos_y = top; pos_y < bottom; ++pos_y)
-				{
-					float s0 = (static_cast<float>(pos_y) + 0.5f - e0_v0.position.Y()) / h_0;
-					float s1 = (static_cast<float>(pos_y) + 0.5f - e1_v0.position.Y()) / h_1;
-					auto vtx_0 = Lerp(e0_v0, e0_v1, s0);
-					auto vtx_1 = Lerp(e1_v0, e1_v1, s1);
+				        float h_0 = e0_v1.position.Y() - e0_v0.position.Y();
+				        float h_1 = e1_v1.position.Y() - e1_v0.position.Y();
+				        int top = static_cast<int>(trap.top + 0.5f);
+				        int bottom = static_cast<int>(trap.bottom + 0.5f);
+				        for (int pos_y = top; pos_y < bottom; ++pos_y)
+				        {
+					          float s0 = (static_cast<float>(pos_y) + 0.5f - e0_v0.position.Y()) / h_0;
+					          float s1 = (static_cast<float>(pos_y) + 0.5f - e1_v0.position.Y()) / h_1;
+					          auto vtx_0 = Lerp(e0_v0, e0_v1, s0);
+					          auto vtx_1 = Lerp(e1_v0, e1_v1, s1);
 
-					int w = int(vtx_1.position.X() + 0.5f) - int(vtx_0.position.X() + 0.5f);
-					int abs_w = Abs(w);
-					auto stride_position = (vtx_1.position - vtx_0.position) / abs_w;
-					auto stride_color = (vtx_1.color - vtx_0.color) / abs_w;
-					auto stride_texcoord = (vtx_1.texcoord - vtx_0.texcoord) / abs_w;
-					auto vtx = vtx_0;
-					int total_steps = abs_w + 1;
-					while (total_steps > 0)
-					{
-						auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
-						uint32_t x = static_cast<uint32_t>(vtx.position.X() + 0.5f);
-						uint32_t y = static_cast<uint32_t>(vtx.position.Y() + 0.5f);
-						float z = vtx.position.Z();
-						uint32_t color = (clr_tex.R() << 16) | (clr_tex.G() << 8) | (clr_tex.B() << 0) | (clr_tex.A() << 24);
-						render_buffer.SetPixel(x, y, color, z);
-						vtx.position += stride_position;
-						//vtx_left.color += stride_color;
-						vtx.texcoord += stride_texcoord;
-						--total_steps;
-					}
-				}
-			}
-
+					          int w = int(vtx_1.position.X() + 0.5f) - int(vtx_0.position.X() + 0.5f);
+					          int abs_w = Abs(w);
+					          auto stride_position = (vtx_1.position - vtx_0.position) / abs_w;
+					          auto stride_color = (vtx_1.color - vtx_0.color) / abs_w;
+					          auto stride_texcoord = (vtx_1.texcoord - vtx_0.texcoord) / abs_w;
+					          auto vtx = vtx_0;
+					          int total_steps = abs_w + 1;
+					          while (total_steps > 0)
+					          {
+						            auto clr_tex = texture->Sample(vtx.texcoord.U(), vtx.texcoord.V());
+                        Point2u point{ static_cast<uint32_t>(vtx.position.X() + 0.5f), static_cast<uint32_t>(vtx.position.Y() + 0.5f)};
+                        DrawPoint(point, clr_tex, vtx.position.Z());
+						            vtx.position += stride_position;
+						            vtx.texcoord += stride_texcoord;
+						            --total_steps;
+					          }
+				        }
+			      }
         }
         else
         {
-			Point2i p0, p1, p2;
-			p0.X() = static_cast<int>(vertices[0]->position.X());
-			p0.Y() = static_cast<int>(vertices[0]->position.Y());
-			p1.X() = static_cast<int>(vertices[1]->position.X());
-			p1.Y() = static_cast<int>(vertices[1]->position.Y());
-			p2.X() = static_cast<int>(vertices[2]->position.X());
-			p2.Y() = static_cast<int>(vertices[2]->position.Y());
-			DrawLine2D(p0, p1, Green);
-			DrawLine2D(p0, p2, Green);
-			DrawLine2D(p1, p2, Green);
+			      Point2i p0, p1, p2;
+			      p0.X() = static_cast<int>(vertices[0]->position.X());
+			      p0.Y() = static_cast<int>(vertices[0]->position.Y());
+			      p1.X() = static_cast<int>(vertices[1]->position.X());
+			      p1.Y() = static_cast<int>(vertices[1]->position.Y());
+			      p2.X() = static_cast<int>(vertices[2]->position.X());
+			      p2.Y() = static_cast<int>(vertices[2]->position.Y());
+			      DrawLine2D(p0, p1, Green);
+			      DrawLine2D(p0, p2, Green);
+			      DrawLine2D(p1, p2, Green);
         }
 
     }
@@ -221,7 +197,7 @@ namespace YtcGE
                 for (int y = from.Y(), x = from.X(), step_count = 0; y != to.Y(); ++step_count)
                 {
                     y += step_y;
-                    x = from.X() + step_count * step_x + 0.5f;
+                    x = static_cast<int>(from.X() + step_count * step_x + 0.5f);
                     render_buffer.SetPixel(x, y, rgba);
 
                 }
@@ -245,7 +221,7 @@ namespace YtcGE
                 for (int x = from.X(), y = from.Y(), step_count = 0; x != to.X(); ++step_count)
                 {
                     x += step_x;
-                    y = from.Y() + step_count * step_y + 0.5f;
+                    y = static_cast<int>(from.Y() + step_count * step_y + 0.5f);
                     render_buffer.SetPixel(x, y, rgba);
 
                 }

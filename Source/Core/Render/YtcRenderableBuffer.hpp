@@ -31,7 +31,7 @@ namespace YtcGE
             if (z >= z_buffer_[pos])
             {
                 z_buffer_[pos] = z;
-				pixel_buffer_[pos] = value;
+				        pixel_buffer_[pos] = value;
             }
         }
 

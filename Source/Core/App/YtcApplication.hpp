@@ -1,11 +1,10 @@
 #ifndef YTC_APPLICATION_HPP
 #define YTC_APPLICATION_HPP
 
+#include <vector>
 #include "../StringUtils/YtcString.hpp"
 #include "../Window/YtcWindow.hpp"
 #include "../Utility/Localization.hpp"
-#include <vector>
-
 namespace YtcGE
 {
 
@@ -29,10 +28,7 @@ namespace YtcGE
 
         static UniquePtr<Application> Create(const std::vector<String> & cmdArgs);
 
-        WindowPtr MainWindow() noexcept
-        {
-            return win_;
-        }
+        WindowPtr MainWindow() noexcept { return win_; }
 
         void Run();
         explicit Application(UniquePtr<RuntimeInfo>&& runtimeInfo);

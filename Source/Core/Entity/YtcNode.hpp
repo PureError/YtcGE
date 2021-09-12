@@ -11,6 +11,8 @@ namespace YtcGE
     {
     public:
         Node() = default;
+        Node(const Node&) = delete;
+        Node& operator=(const Node)=delete;
         virtual ~Node();
 
         const String& Name() const noexcept

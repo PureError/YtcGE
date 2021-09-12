@@ -8,6 +8,7 @@ namespace YtcGE
     class GameLogicManager : public Singleton<GameLogicManager>
     {
         MARK_AS_SINGLETON();
+        GameLogicManager();
     public:
         void Update();
     };

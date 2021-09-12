@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCamera.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcInputManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcColor.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Utility\YtcFileSystem.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Utility\YtcIniFile.cpp" />
+    <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestModel.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestSingleton.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestString.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestVector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCamera.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Fundation.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInput.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInputDevice.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcKeyboard.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcMouse.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMath.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMatrix.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcPoint.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcGameLogicManger.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcInputManager.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcSceneManager.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcModel.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\Localization.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventHandler.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileStream.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileSystem.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcIniFile.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcLambda.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcUncopyable.hpp" />
+    <ClInclude Include="..\..\..\Source\Core\Window\YtcWindow.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestMatrix.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestModel.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestSingleton.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestString.hpp" />
+    <ClInclude Include="..\..\..\UnitTests\TestVector.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6E1C5CE4-1A44-43CF-82EF-4EBB797F179E}</ProjectGuid>
+    <RootNamespace>YtcGEProj</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\bin\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\..\bin\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)..\..\..\bin\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\..\bin\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)..\..\..\bin\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\..\bin\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)..\..\..\bin\$(Platform)\</OutDir>
+    <IntDir>$(ProjectDir)..\..\..\bin\$(Platform)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

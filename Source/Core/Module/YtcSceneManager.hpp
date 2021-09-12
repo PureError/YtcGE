@@ -10,13 +10,9 @@ namespace YtcGE
         MARK_AS_SINGLETON();
     public:
         void AddScene(const ScenePtr& scene);
-        void ReplaceScence(const String& name);
-
-        ScenePtr CurrentScene() noexcept
-        {
-            return current_scene_;
-        }
-
+        void ReplaceScene(const String& name);
+        void ReplaceScene() { (++current_scene_) %= SceneCount(); }
+        ScenePtr CurrentScene() noexcept { return current_scene_ < 0 ? nullptr : scenes_[current_scene_]; }
         void Update();
 
         size_t SceneCount() noexcept
@@ -34,7 +30,7 @@ namespace YtcGE
 
         SceneManager() = default;
         ~SceneManager() = default;
-        ScenePtr current_scene_;
+        int current_scene_ = -1;
         SceneList scenes_;
     };
 }

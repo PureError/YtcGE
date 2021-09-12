@@ -13,6 +13,7 @@ namespace YtcGE
     using Point3i = Point_T<int, 3>;
     using Point4i = Point_T<int, 4>;
     using Point4f = Point_T<float, 4>;
+    using Point2u = Point_T<uint32_t, 2>;
 }
 
 #endif

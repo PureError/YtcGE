@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\UnitTests\Main.cpp" />
+    <ClCompile Include="..\..\..\UnitTests\TestString.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestVector.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestMatrix.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\App\YtcApplication.cpp">
+      <Filter>Source\Core\App</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Window\YtcWindow.cpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderer.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcVertex.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcTexture.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcImage.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcNode.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcScene.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestSingleton.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCamera.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Entity\YtcCube.cpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcModel.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcInputManager.cpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcSceneManager.cpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Module\YtcGameLogicManger.cpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UnitTests\TestModel.cpp">
+      <Filter>UnitTests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Render\YtcColor.cpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Utility\YtcFileSystem.cpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Source\Core\Utility\YtcIniFile.cpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="UnitTests">
+      <UniqueIdentifier>{9a5554f7-db5f-44a6-ac06-7200e4373034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{8ba15e8f-a13b-4657-81d0-2f243442d3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core">
+      <UniqueIdentifier>{81bac830-9246-4b1b-aeec-5c9c1dadef92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Log">
+      <UniqueIdentifier>{3667f0ad-b687-4c5d-84ae-ae5556122a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Math">
+      <UniqueIdentifier>{d34d7e0f-7190-4166-ba78-96745f42de2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Platform">
+      <UniqueIdentifier>{98b694db-ec59-4e80-93a1-e66143345c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\StringUtils">
+      <UniqueIdentifier>{39de9f6a-24f2-4e7f-b196-070c5f9de3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\App">
+      <UniqueIdentifier>{d5c535b3-3a6e-45c5-be3f-b4c6e4bf1c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Window">
+      <UniqueIdentifier>{0f44bf3d-93d8-4330-8396-8d32766f61b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Utility">
+      <UniqueIdentifier>{f422a434-4a11-4888-9be4-9ca1ba10355a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Render">
+      <UniqueIdentifier>{f30cd74d-e395-42d5-98e0-bc3ff07c45e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Entity">
+      <UniqueIdentifier>{7c33dd6a-bc9b-43f8-a36a-395eafa5533d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Module">
+      <UniqueIdentifier>{37e53e78-cc11-46ce-9d8b-345f050de83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Core\Input">
+      <UniqueIdentifier>{4b67d89b-0fd0-43c9-8280-4ad8373e84cb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\UnitTests\TestString.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestVector.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\MathUtil.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMath.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcVector.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\StringUtils\YtcString.hpp">
+      <Filter>Source\Core\StringUtils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcCompiler.hpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Platform\YtcOS.hpp">
+      <Filter>Source\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Fundation.hpp">
+      <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Log\YtcLog.hpp">
+      <Filter>Source\Core\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcMatrix.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestMatrix.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\App\YtcApplication.hpp">
+      <Filter>Source\Core\App</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Window\YtcWindow.hpp">
+      <Filter>Source\Core\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcRect.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\Localization.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcException.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventDispatcher.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderer.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Math\YtcPoint.hpp">
+      <Filter>Source\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcColor.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcVertex.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcTexture.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcBmp.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcImage.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcRenderableBuffer.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcNode.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcScene.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSingleton.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcUncopyable.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcSyncObject.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestSingleton.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCube.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Render\YtcModel.hpp">
+      <Filter>Source\Core\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcSceneManager.hpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Entity\YtcCamera.hpp">
+      <Filter>Source\Core\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcInputManager.hpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcKeyboard.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcMouse.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInput.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Input\YtcInputDevice.hpp">
+      <Filter>Source\Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcLambda.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Module\YtcGameLogicManger.hpp">
+      <Filter>Source\Core\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcEventHandler.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileStream.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UnitTests\TestModel.hpp">
+      <Filter>UnitTests</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcFileSystem.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Source\Core\Utility\YtcIniFile.hpp">
+      <Filter>Source\Core\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

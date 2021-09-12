@@ -1,11 +1,12 @@
+#include <thread>
+#include <random>
 #include "YtcApplication.hpp"
 #include "../Utility/Localization.hpp"
 #include "../Render/YtcRenderer.hpp"
 #include "../Module/YtcSceneManager.hpp"
 #include "../Module/YtcGameLogicManger.hpp"
 #include "../Entity/YtcCube.hpp"
-#include <thread>
-#include <random>
+#include "../Utility/YtcIniFile.hpp"
 
 
 using namespace YtcGE;
@@ -28,18 +29,17 @@ void YtcGE::Application::Run()
     CreateSceneForTest();
 
     UniquePtr<MSG> msg = MakeUnique<MSG>();
-    auto hwnd = win_->Handle();
     auto msgPtr = msg.get();
-    BOOL hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_NOREMOVE);
+    BOOL hasMsg = ::PeekMessage(msgPtr, NULL, 0, 0, PM_NOREMOVE);
     while (msgPtr->message != WM_QUIT)
     {
         if (win_->Active())
         {
-            hasMsg = ::PeekMessage(msgPtr, hwnd, 0, 0, PM_REMOVE);
+            hasMsg = ::PeekMessage(msgPtr, NULL, 0, 0, PM_REMOVE);
         }
         else
         {
-            hasMsg = ::GetMessage(msgPtr, hwnd, 0, 0);
+            hasMsg = ::GetMessage(msgPtr, NULL, 0, 0);
         }
 
         if (hasMsg)
@@ -82,17 +82,7 @@ static SharedPtr<Node> CubeForTest()
     tex_coords[Cube::NEAR_BOTTOM_LEFT] = { 0.0f, 1.0f };
     tex_coords[Cube::NEAR_BOTTOM_RIGHT] = { 1.0f, 1.0f };
     auto cube = MakeShared<Cube>(2.0f, 2.0f, 2.0f);
-    cube->Name() = _T("YtcCube");
     cube->TextureCoord(tex_coords);
-    try
-    {
-        auto img = Image::FromFile("./../../Resource/Images/windows_logo.bmp");
-        auto texture = MakeShared<Texture2D>(img);
-        cube->Texture(texture);
-    }
-    catch (...)
-    {
-    }
 
     //cube->Rotate(Vec3f{ 1.0f, 1.0f, 0.0f }, DegreesToRadians(45.0f));
     return cube;
@@ -101,29 +91,60 @@ static SharedPtr<Node> CubeForTest()
 static SharedPtr<Node> DiabloForTest()
 {
     auto node = MakeShared<Node>();
-    node->Name() = _T("Diablo");
-    ModelDataMapPtr model_data = MakeShared<ModelDataMap>(_T("./../../Resource/3DModels/diablo.obj"));
-    node->ModelInUse() = MakeShared<Model>(model_data);
-    auto img = Image::FromFile("./../../Resource/Images/diablo3_pose_diffuse.bmp");
-    auto texture = MakeShared<Texture2D>(img);
-    node->Texture(texture);
+
     return node;
 }
 
+
 void YtcGE::Application::CreateSceneForTest()
 {
-    String scene_name = _T("TestScene");
-    auto scene = MakeShared<Scene>(scene_name);
-    CameraPtr cam = MakeShared<Camera>();
-    auto w = win_->RenderBuffer().Width();
-    auto h = win_->RenderBuffer().Height();
-    auto aspect = w * 1.0f / h;
-    cam->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
-    auto & s = *scene;
-    //s.AddNode(CubeForTest());
-    s.AddNode(DiabloForTest());
-    s.AddCamera(_T("TestCamera"), cam, true);
-    SceneManager::Instance().AddScene(scene);
-    SceneManager::Instance().ReplaceScence(scene_name);
+    IniObject setting(_T("./setting.ini"));
+    {
+        String scene_name = _T("test_node_cube");
+        auto& section = setting.GetSection(scene_name);
+        auto scene = MakeShared<Scene>(scene_name);
+        auto camera = MakeShared<Camera>();
+        auto w = win_->RenderBuffer().Width();
+        auto h = win_->RenderBuffer().Height();
+        auto aspect = w * 1.0f / h;
+        camera->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
+        scene->AddCamera(_T("TestCamera"), camera, true);
+        auto cube = CubeForTest();
+        cube->Name() = section.at(_T("name"));
+        auto& txt_path = section.at(_T("texture_path"));
+        if (!txt_path.empty())
+        {
+          auto img = Image::FromFile(txt_path);
+          auto texture = MakeShared<Texture2D>(img);
+          cube->Texture(texture);
+        }
+        scene->AddNode(cube);
+        SceneManager::Instance().AddScene(scene);
+        SceneManager::Instance().ReplaceScene(scene_name);
+    }
+    
+    {
+        String scene_name = _T("test_node_diablo");
+        auto& section = setting.GetSection(scene_name);
+        auto scene = MakeShared<Scene>(scene_name);
+        auto camera = MakeShared<Camera>();
+        auto w = win_->RenderBuffer().Width();
+        auto h = win_->RenderBuffer().Height();
+        auto aspect = w * 1.0f / h;
+        camera->AdjustProjectionParam(DegreesToRadians(90.0f), aspect, 1.0f, 500.0f);
+        scene->AddCamera(_T("TestCamera"), camera, true);
+        auto node = DiabloForTest();
+        ModelDataMapPtr model_data = MakeShared<ModelDataMap>(section.at(_T("model_path")));
+        node->ModelInUse() = MakeShared<Model>(model_data);
+        node->Name() = section.at(_T("name"));
+        auto& txt_path = section.at(_T("texture_path"));
+        if (!txt_path.empty())
+        {
+          auto texture = MakeShared<Texture2D>(Image::FromFile(txt_path));
+          node->Texture(texture);
+        }
+        scene->AddNode(node);
+        SceneManager::Instance().AddScene(scene);
+    }
 }
 

@@ -1,6 +1,6 @@
 #include "YtcWindow.hpp"
 #include "Core/Utility/YtcException.hpp"
-
+#include "Core/Log/YtcLog.hpp"
 namespace YtcGE
 {
     YtcGE::BasicWindow::BasicWindow(const Attributes& na)
@@ -121,13 +121,14 @@ namespace YtcGE
                 break;
             case WM_CLOSE:
                 Close();
-                return TRUE;
+                return 0;
                 break;
             case WM_DESTROY:
                 break;
             case WM_KEYDOWN:
             case WM_KEYUP:
                 eventDispatcher_->Dispatch(uMsg, wParam);
+                return 0;
                 break;
             default:
                 break;

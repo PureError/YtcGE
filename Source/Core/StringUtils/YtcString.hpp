@@ -30,7 +30,7 @@ namespace YtcGE
         using Base = StringBase<C, T, A>;
         using MyType = String_T<C, T, A>;
         
-        static const MyType & Emtpy() noexcept
+        static const MyType & Empty() noexcept
         {
             static MyType empty;
             return empty;
@@ -77,7 +77,7 @@ namespace YtcGE
         {
         }
 
-        template<class Iter, class = typename std::enable_if_t<typename std::_Is_iterator<Iter>::value, Iter>>
+        template<class Iter, class = typename std::enable_if_t<std::_Is_iterator<Iter>::value, Iter>>
         String_T(Iter begin, Iter end) : Base(begin, end)
         {
         }
@@ -126,6 +126,8 @@ namespace YtcGE
     using Char = char;
 #endif
     using String = String_T<Char, std::char_traits<Char>, std::allocator<Char>>;
+    using IStream = std::basic_istream<Char>;
+    using OStream = std::basic_ostream<Char>;
     using StringBuffer = std::basic_stringbuf<Char>;
     using StringStream = std::basic_stringstream<Char>;
 
